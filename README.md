@@ -23,6 +23,12 @@ namespace_provisioner:
       subPath: scan
       url: https://github.com/atmandhol/tap-nsp-gitops.git
     path: _ytt_lib/scansetup
+  # Add parameterized tekton test pipeline
+  - git:
+      ref: origin/main
+      subPath: test
+      url: https://github.com/atmandhol/tap-nsp-gitops.git
+    path: _ytt_lib/testsetup
 ```
 
 ## Manage Desired namespaces
