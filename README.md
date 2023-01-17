@@ -37,9 +37,11 @@ namespace_provisioner:
     path: _ytt_lib/extras
 ```
 
-## Manage Desired namespaces
+## Manage Desired namespaces via GitOps
 
-We will use `kapp App` to sync the desired namespaces from our GitOps repo to our TAP cluster. Namespace provisioner also uses kapp and owns the `desired-namespaces` ConfigMap on the cluster. We will add an annotation `as` using a Package overlay so the 2 `kapp Apps` don't fight over ownership issues.
+We will use `kapp App` to sync the desired namespaces from our GitOps repo to our TAP cluster. Namespace provisioner also uses kapp and owns the `desired-namespaces` ConfigMap on the cluster. We will add an annotation `kapp.k14s.io/exists: ""` to the Namespace provisioner default `desired-namespaces` ConfigMap using a Package overlay so the 2 `kapp Apps` don't fight over ownership issues.
+
+### Create an Overlay secret
 
 ```bash
 cat <<EOF | kubectl apply -f -
@@ -61,6 +63,7 @@ stringData:
         kapp.k14s.io/exists: ""
 EOF
 ```
+### Update the TAP Config with NSP Package Overlay
 
 Add the following to the tap values config
 
@@ -71,8 +74,10 @@ package_overlays:
   - name: desired-namespaces-overlay
 ```
 
+### Create the kapp App that will sync desired-namespaces from GitOps repo
+
 We will now create a Carvel App that:
-- Maintains the `desired-namespaces` ConfigMap from this GitOps Repo.
+- Creates the `desired-namespaces` ConfigMap from this GitOps Repo and owns that ConfigMap.
 - Creates all the namespaces mentioned in the `desired-ns-list.yaml` in the `ns` folder in our GitOps repo.
 
 ```bash
