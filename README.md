@@ -30,6 +30,6 @@ We will now create a Carvel App that:
 - Maintains the `desired-namespaces` ConfigMap from this GitOps Repo.
 - Creates all the namespaces mentioned in the `desired-ns-list.yaml` in the `ns` folder in our GitOps repo.
 
-```yaml
-
+```bash
+kubectl apply -f https://github.com/atmandhol/tap-nsp-gitops/raw/main/apps/01-desired-namespaces-sync.yaml
 ```
