@@ -8,9 +8,9 @@ metadata:
   name: snyk-token-secret
 spec:
   data:
-  - secretKey: snyk-token
+  - secretKey: snyk_token
     remoteRef:
-      key: snyk-token
+      key: snyk_token
   refreshInterval: 10m
   secretStoreRef:
     kind: ClusterSecretStore
