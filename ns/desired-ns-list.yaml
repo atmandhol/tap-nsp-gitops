@@ -10,7 +10,7 @@
 namespaces:
 - name: dev
   scan:
-    scanner: grype
+    scanner: snyk
     policy: lax
   test:
     image: gradle

@@ -1,0 +1,24 @@
+#@ load("@ytt:data", "data")
+#@ load("@scan:funcs.star", "is_supply_chain", "is_profile", "get_scanner_for_ns", "is_scanpolicy_lax")
+#@ if/end is_supply_chain(['testing_scanning']) and is_profile(['full', 'build']) and get_scanner_for_ns() == "snyk":
+---
+apiVersion: external-secrets.io/v1alpha1
+kind: ExternalSecret
+metadata:
+  name: snyk-token-secret
+spec:
+  data:
+  - secretKey: snyk-token
+    remoteRef:
+      key: snyk-token
+  refreshInterval: 10m
+  secretStoreRef:
+    kind: ClusterSecretStore
+    name: google-secrets-manager
+  target:
+    name: snyk-token-secret
+    creationPolicy: Owner
+    deletionPolicy: Owner
+    template:
+      data:
+        snyk_token: {{ .data.snyk-token-secret }}
