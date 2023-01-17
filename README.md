@@ -36,6 +36,11 @@ Label the secret for ESO to know what kind of secret it is.
 kubectl label secret google-secret-manager-secret --namespace external-secrets type=gcpsm
 ```
 
+Create the ClusterSecretStore
+```bash
+ytt -f https://raw.githubusercontent.com/atmandhol/tap-nsp-gitops/main/tap/01-cluster-secret-store-gcp.yaml -v gcp_project=${GCP-PROJECT} -v key=${KEY} |
+ kubectl apply -f -
+```
 
 ## Namespace Provisioner Setup
 
@@ -71,7 +76,7 @@ We will use `kapp App` to sync the desired namespaces from our GitOps repo to ou
 ### Create an Overlay secret
 
 ```bash
-kubectl apply -f 
+kubectl apply -f https://raw.githubusercontent.com/atmandhol/tap-nsp-gitops/main/tap/02-desired-namespace-overlay.yaml
 ```
 ### Update the TAP Config with NSP Package Overlay
 
