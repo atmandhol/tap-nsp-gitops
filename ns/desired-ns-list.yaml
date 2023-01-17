@@ -1,5 +1,8 @@
 #! List out all the namespaces you want to create with additional
 #! parameters for configuration.
+#! Following is a list of supported parameters as per my setup
+#! 1) scanner: accepted values are "grype", "snyk", "carbonblack" and "prisma". Installs the scanner mentioned by this param in the namespace.
+#! 2) scanpolicy: accepted values are "strict", "lax". lax scanpolicies allows all severity CVEs to be present.
 #@data/values
 ---
 namespaces:
