@@ -36,9 +36,10 @@ Label the secret for ESO to know what kind of secret it is.
 kubectl label secret google-secret-manager-secret --namespace external-secrets type=gcpsm
 ```
 
-Create the ClusterSecretStore
+Create the ClusterSecretStore. `GCP-PROJECT` is the name of the Google Cloud Platform project and `key` is the name of the key in secret, normally its the same as the name of the JSON file. 
+
 ```bash
-ytt -f https://raw.githubusercontent.com/atmandhol/tap-nsp-gitops/main/tap/01-cluster-secret-store-gcp.yaml -v gcp_project=${GCP-PROJECT} -v key=${KEY} |
+ytt -f https://raw.githubusercontent.com/atmandhol/tap-nsp-gitops/main/tap/01-cluster-secret-store-gcp.yaml -v gcp_project=${GCP-PROJECT} -v key=$(kubectl get secret google-secret-manager-secret -n external-secrets -o json | jq -r .data | jq -r 'keys' | jq -r '.[0]') |
  kubectl apply -f -
 ```
 
