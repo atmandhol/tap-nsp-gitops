@@ -21,4 +21,4 @@ spec:
                 name: tap-values-config
   deploy:
     - kapp:
-        rawOptions: ["--dangerous-allow-empty-list-of-resources=true"]
+        rawOptions: ["--dangerous-allow-empty-list-of-resources=true", "--dangerous-override-ownership-of-existing-resources=true"]
