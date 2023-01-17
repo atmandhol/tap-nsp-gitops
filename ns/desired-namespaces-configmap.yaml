@@ -8,6 +8,7 @@ metadata:
   namespace: tap-namespace-provisioning
   annotations:
     kapp.k14s.io/create-strategy: fallback-on-update
+    kapp.k14s.io/exists: ""
     #! This annotation tells the provisioner app to not override 
     #! this configMap as this is your desired state.
     namespace-provisioner.apps.tanzu.vmware.com/no-overwrite: ""
