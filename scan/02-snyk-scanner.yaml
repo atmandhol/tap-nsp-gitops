@@ -17,8 +17,3 @@ spec:
     name: google-secrets-manager
   target:
     name: snyk-token-secret
-    creationPolicy: Owner
-    deletionPolicy: Owner
-    template:
-      data:
-        snyk_token: '{{ .data }}'
