@@ -14,6 +14,11 @@ spec:
       # Add this secretRef if you are talking to a private repo
       # secretRef:
       #   name: git-creds-carvel
+  template:
+  - ytt:
+      valuesFrom:
+      - secretRef:
+          name: tap-values-config
   deploy:
     - kapp:
         rawOptions: ["--dangerous-allow-empty-list-of-resources=true", "--dangerous-override-ownership-of-existing-resources=true"]
