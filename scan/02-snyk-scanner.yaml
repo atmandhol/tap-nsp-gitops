@@ -21,4 +21,4 @@ spec:
     deletionPolicy: Owner
     template:
       data:
-        snyk_token: {{ .data.snyk-token-secret }}
+        snyk_token: '{{ .data }}'
