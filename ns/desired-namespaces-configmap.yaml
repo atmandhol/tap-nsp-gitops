@@ -8,7 +8,6 @@ metadata:
   namespace: tap-namespace-provisioning
   annotations:
     kapp.k14s.io/create-strategy: fallback-on-update
-    kapp.k14s.io/exists: ""
 data:
   #@yaml/text-templated-strings
   namespaces.yaml: |
