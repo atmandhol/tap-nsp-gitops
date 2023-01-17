@@ -1,9 +1,24 @@
 # tap-nsp-gitops
-This repo contains resources that I want to create in my developer namespaces on my TAP cluster
+This repo contains resources that I want to create in my Developer namespaces on my TAP cluster using GitOps and Namespace Provisioner (NSP).
 
-## Acknowledgement
-Other repos that made this repo possible:
-- Dodd's gitops platform: https://dev.azure.com/doddatvmware/tap-lab/_git/gitops-platform?version=GB1.4
-- Accelerator Samples repo: https://github.com/vmware-tanzu/application-accelerator-samples
-- TAP Install Gitops: https://github.com/alexandreroman/tap-install-gitops
-- TAP GitOps Reference: https://github.com/tanzu-end-to-end/tap-gitops-reference
+This tutorial is using the following:
+- Tanzu Application Platform 1.4 (I am using GKE as infra)
+- Namespace Provisioner for TAP (Installed as part of TAP 1.4 profile installation)
+- Google Secrets Manager
+- External Secrets Operator (Is shipped as a Package in TAP 1.4 and can be installed manually as follows)
+```
+tanzu package install external-secrets-package --package-name external-secrets.apps.tanzu.vmware.com --version 0.6.1+tap.2 --namespace tap-install
+```
+
+## Namespace Provisioner TAP Config
+
+```yaml
+namespace_provisioner:
+  additional_sources:
+  # Add scanners and scanpolicies
+  - git:
+      ref: origin/main
+      subPath: scan
+      url: https://github.com/atmandhol/tap-nsp-gitops.git
+    path: _ytt_lib/scansetup
+```
