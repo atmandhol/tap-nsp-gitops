@@ -14,6 +14,8 @@ tanzu package install external-secrets-package --package-name external-secrets.a
 
 ```yaml
 namespace_provisioner:
+  # We are setting this to false as we will manage the desired-namespaces configmap using GitOps. All the namespaces we want to create and their params are in ns folder in the https://github.com/atmandhol/tap-nsp-gitops.git repo.
+  controller: false
   additional_sources:
   # Add scanners and scanpolicies
   - git:
@@ -21,4 +23,13 @@ namespace_provisioner:
       subPath: scan
       url: https://github.com/atmandhol/tap-nsp-gitops.git
     path: _ytt_lib/scansetup
+```
+
+## Manage Desired namespaces
+We will now create a Carvel App that:
+- Maintains the `desired-namespaces` ConfigMap from this GitOps Repo.
+- Creates all the namespaces mentioned in the `desired-ns-list.yaml` in the `ns` folder in our GitOps repo.
+
+```yaml
+
 ```

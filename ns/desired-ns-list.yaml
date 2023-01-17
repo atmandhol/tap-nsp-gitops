@@ -1,0 +1,10 @@
+#! List out all the namespaces you want to create with additional
+#! parameters for configuration.
+#@data/values
+---
+namespaces:
+- name: dev
+  scanner: grype
+  scanpolicy: lax
+- name: qa
+  scanner: grype
