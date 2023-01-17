@@ -2,15 +2,42 @@
 This repo contains resources that I want to create in my Developer namespaces on my TAP cluster using GitOps and Namespace Provisioner (NSP).
 
 This tutorial is using the following:
-- Tanzu Application Platform 1.4 (I am using GKE as infra)
-- Namespace Provisioner for TAP (Installed as part of TAP 1.4 profile installation)
-- Google Secrets Manager
-- External Secrets Operator (Is shipped as a Package in TAP 1.4 and can be installed manually as follows)
-```
+- `Tanzu Application Platform` 1.4
+  - I am using GKE as infra of choice.
+- `Namespace Provisioner` for TAP for provisioning resources in our developer namespaces.
+  - Namespace Provisioner (NSP) is installed as part of TAP 1.4 profile installation.
+- `Google Secrets Manager` for storing all our secrets.
+- `External Secrets Operator` (ESO) to pull the secrets from Google Secrets Manager into our TAP Cluster.
+  - ESO is shipped as a Package in TAP 1.4 and can be installed manually.
+
+## External Secrets Operator Setup
+
+We will install the External secrets operator on our TAP cluster and connect it to our Google Secrets Manager so we can pull all our secrets in our cluster securely.
+
+### Pre-requisites
+- GCP account and a Service account JSON key that has access to Google Secrets Manager to read the secrets.
+
+### Install External Secrets Operator
+
+It is already shipped as a package in TAP 1.4, so we can install is using the following command
+```bash
 tanzu package install external-secrets-package --package-name external-secrets.apps.tanzu.vmware.com --version 0.6.1+tap.2 --namespace tap-install
 ```
 
-## Namespace Provisioner TAP Config
+### Create a Secret with GCP Service Account JSON creds for ESO
+
+Run the following command to create a generic secret.
+```bash
+kubectl create secret generic google-secret-manager-secret --namespace external-secrets --from-file ${PATH-TO-YOUR-JSON-FILE}
+```
+
+Label the secret for ESO to know what kind of secret it is.
+```bash
+kubectl label secret google-secret-manager-secret --namespace external-secrets type=gcpsm
+```
+
+
+## Namespace Provisioner Setup
 
 ```yaml
 namespace_provisioner:
@@ -44,24 +71,7 @@ We will use `kapp App` to sync the desired namespaces from our GitOps repo to ou
 ### Create an Overlay secret
 
 ```bash
-cat <<EOF | kubectl apply -f -
-apiVersion: v1
-kind: Secret
-metadata:
-  name: desired-namespaces-overlay
-  namespace: tap-install
-  annotations:
-    kapp.k14s.io/change-rule: "delete after deleting tap"
-stringData:
-  annotate-desired-namespaces-configmap-with-exists.yaml: |
-    #@ load("@ytt:overlay", "overlay")
-    #@overlay/match by=overlay.subset({"metadata":{"name":"desired-namespaces"}, "kind": "ConfigMap"})
-    ---
-    metadata:
-      annotations:
-        #@overlay/match missing_ok=True
-        kapp.k14s.io/exists: ""
-EOF
+kubectl apply -f 
 ```
 ### Update the TAP Config with NSP Package Overlay
 
