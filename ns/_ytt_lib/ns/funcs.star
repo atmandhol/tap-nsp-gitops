@@ -14,7 +14,7 @@ end
 
 def get_scanner_for_ns(ns):
   if not hasattr(ns, "scan") and not hasattr(ns.scan, "scanner"):
-    return "grype"
+    return ["grype"]
   end
   return ns.scan.scanner
 end
