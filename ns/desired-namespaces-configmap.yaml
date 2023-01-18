@@ -1,6 +1,6 @@
 #@ load("@ytt:data", "data")
 #@ load("@ytt:yaml", "yaml")
-#@ load("@ns:funcs.star", "get_scanner_for_ns", "get_snyk_values")
+#@ load("@ns:funcs.star", "is_supply_chain", "is_profile", "get_scanner_for_ns", "get_snyk_values")
 ---
 apiVersion: v1
 kind: ConfigMap
