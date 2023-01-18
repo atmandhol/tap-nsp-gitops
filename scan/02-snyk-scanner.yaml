@@ -17,4 +17,3 @@ spec:
     name: google-secrets-manager
   target:
     name: snyk-token-secret
-#@ end
