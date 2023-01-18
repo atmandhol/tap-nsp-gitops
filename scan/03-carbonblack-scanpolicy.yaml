@@ -1,6 +1,6 @@
 #@ load("@ytt:data", "data")
 #@ load("@scan:funcs.star", "in_list", "is_supply_chain", "is_profile", "get_scanner_for_ns", "get_scanpolicy_for_ns")
-#@ if/end is_supply_chain(['testing_scanning']) and is_profile(['full', 'build']) and in_list("carbonblack", get_scanner_for_ns()) and in_list("carbonblack", get_scanpolicy_for_ns()):
+#@ if/end is_supply_chain(['testing_scanning']) and is_profile(['full', 'build']) and "carbonblack" in get_scanner_for_ns() and "carbonblack" in get_scanpolicy_for_ns():
 ---
 apiVersion: scanning.apps.tanzu.vmware.com/v1beta1
 kind: ScanPolicy
