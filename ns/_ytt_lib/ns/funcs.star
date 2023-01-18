@@ -19,9 +19,9 @@ def get_scanner_for_ns(ns):
   return ns.scan.scanner
 end
 
-def get_snyk_values():
+def get_snyk_values(ns):
   snyk_values = {}
-  snyk_values["namespace"] = data.values.name
+  snyk_values["namespace"] = ns.name
   snyk_values["targetImagePullSecret"] = "registries-credentials"
   snyk_values["snyk"] = {"tokenSecret": {"name": "snyk-token-secret"}}
   return snyk_values
