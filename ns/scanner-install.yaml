@@ -8,7 +8,7 @@
 
 #@ for ns in data.values.namespaces:
 
-#@ if is_supply_chain(['testing_scanning']) and is_profile(['full', 'build']) and has_attr(get_scanner_for_ns(ns), "snyk"):
+#@ if is_supply_chain(['testing_scanning']) and is_profile(['full', 'build']) and hasattr(get_scanner_for_ns(ns), "snyk"):
 ---
 apiVersion: packaging.carvel.dev/v1alpha1
 kind: PackageInstall
