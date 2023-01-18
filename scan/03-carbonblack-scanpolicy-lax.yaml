@@ -1,11 +1,11 @@
 #@ load("@ytt:data", "data")
-#@ load("@scan:funcs.star", "is_supply_chain", "is_profile", "get_scanner_for_ns", "is_scanpolicy_lax")
-#@ if/end is_supply_chain(['testing_scanning']) and is_profile(['full', 'build']) and get_scanner_for_ns() == "carbonblack" and is_scanpolicy_lax():
+#@ load("@scan:funcs.star", "in_list", "is_supply_chain", "is_profile", "get_scanner_for_ns", "get_scanpolicy_for_ns")
+#@ if/end is_supply_chain(['testing_scanning']) and is_profile(['full', 'build']) and in_list("carbonblack", get_scanner_for_ns()) and in_list("carbonblack-lax", get_scanpolicy_for_ns()):
 ---
 apiVersion: scanning.apps.tanzu.vmware.com/v1beta1
 kind: ScanPolicy
 metadata:
-  name: scan-policy
+  name: cb-scan-policy
   labels:
     'app.kubernetes.io/part-of': 'scan-system'
 spec:

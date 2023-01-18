@@ -14,16 +14,16 @@ end
 
 def get_scanner_for_ns():
   if not hasattr(data.values, "scan") and not hasattr(data.values.scan, "scanner"):
-    return "grype"
+    return ["grype"]
   end
   return data.values.scan.scanner
 end
 
-def is_scanpolicy_lax():
-  if hasattr(data.values, "scan") and hasattr(data.values.scan, "policy") and data.values.scan.policy == "lax":
-    return True
+def get_scanpolicy_for_ns():
+  if not hasattr(data.values, "scan") and not hasattr(data.values.scan, "policy"):
+    return ["grype"]
   end
-  return False
+  return data.values.scan.policy
 end
 
 def get_snyk_values():

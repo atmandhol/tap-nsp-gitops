@@ -10,14 +10,21 @@
 namespaces:
 - name: dev
   scan:
-    scanner: snyk
-    policy: lax
+    scanner: 
+      - grype
+      - snyk
+    policy:
+      - grype-lax
+      - snyk-lax
   test:
     image: gradle
     cmd: ./mvnw test
 - name: qa
   scan:
-    scanner: grype
+    scanner: 
+      - grype
+    policy:
+      - grype
   test:
     image: gradle
     cmd: ./mvnw test
