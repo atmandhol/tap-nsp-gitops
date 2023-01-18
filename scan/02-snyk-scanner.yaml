@@ -1,5 +1,5 @@
 #@ load("@ytt:data", "data")
-#@ load("@scan:funcs.star", "is_supply_chain", "is_profile", "get_scanner_for_ns", "is_scanpolicy_lax")
+#@ load("@scan:funcs.star", "is_supply_chain", "is_profile", "get_scanner_for_ns", "is_scanpolicy_lax, "get_snyk_values")
 #@ if is_supply_chain(['testing_scanning']) and is_profile(['full', 'build']) and get_scanner_for_ns() == "snyk":
 ---
 apiVersion: external-secrets.io/v1alpha1
@@ -37,15 +37,7 @@ spec:
   serviceAccountName: tap-install-sa
   values:
   - secretRef:
-      name: #@ "grype-scanner-" + data.values.name
-
-#@ def get_snyk_values():
-#@   snyk_values = {}
-#@   snyk_values["namespace"] = data.values.name
-#@   snyk_values["targetImagePullSecret"] = "registries-credentials"
-#@   snyk_values["snyk"] = {"tokenSecret": {"name": "snyk-token-secret"}}
-#@   return snyk_values
-#@ end
+      name: #@ "snyk-scanner-" + data.values.name
 ---
 apiVersion: v1
 kind: Secret
