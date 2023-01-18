@@ -1,6 +1,6 @@
 #@ load("@ytt:data", "data")
 #@ load("@scan:funcs.star", "is_supply_chain", "is_profile", "get_scanner_for_ns", "is_scanpolicy_lax")
-#@ if/end is_supply_chain(['testing_scanning']) and is_profile(['full', 'build']) and get_scanner_for_ns() == "snyk":
+#@ if is_supply_chain(['testing_scanning']) and is_profile(['full', 'build']) and get_scanner_for_ns() == "snyk":
 ---
 apiVersion: external-secrets.io/v1alpha1
 kind: ExternalSecret
@@ -17,3 +17,43 @@ spec:
     name: google-secrets-manager
   target:
     name: snyk-token-secret
+#@ end
+
+#@ if is_supply_chain(['testing_scanning']) and is_profile(['full', 'build']) and get_scanner_for_ns() == "snyk":
+---
+apiVersion: packaging.carvel.dev/v1alpha1
+kind: PackageInstall
+metadata:
+  name: #@ "snyk-scanner-" + data.values.name
+  namespace: tap-install
+  annotations:
+    kapp.k14s.io/create-strategy: fallback-on-update
+spec:
+  packageRef:
+    refName: snyk.scanning.apps.tanzu.vmware.com
+    versionSelection:
+      constraints: ">1.0.0"
+      prereleases: {}
+  serviceAccountName: tap-install-sa
+  values:
+  - secretRef:
+      name: #@ "grype-scanner-" + data.values.name
+
+#@ def get_snyk_values():
+#@   snyk_values = {}
+#@   snyk_values["namespace"] = data.values.name
+#@   snyk_values["targetImagePullSecret"] = "registries-credentials"
+#@   snyk_values["snyk"] = {"tokenSecret": {"name": "snyk-token-secret"}}
+#@   return snyk_values
+#@ end
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: #@ "snyk-scanner-" + data.values.name
+  namespace: tap-install
+  annotations:
+    kapp.k14s.io/create-strategy: fallback-on-update
+stringData:
+  values.yml: #@ yaml.encode(get_snyk_values())
+#@ end
