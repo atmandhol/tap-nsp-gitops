@@ -12,18 +12,11 @@ def is_supply_chain(sc_list):
   return in_list('supply_chain', sc_list)
 end
 
-def get_scanner_for_ns():
-  if not hasattr(data.values, "scan") and not hasattr(data.values.scan, "scanner"):
+def get_scanner_for_ns(ns):
+  if not hasattr(ns, "scan") and not hasattr(ns.scan, "scanner"):
     return "grype"
   end
-  return data.values.scan.scanner
-end
-
-def is_scanpolicy_lax():
-  if hasattr(data.values, "scan") and hasattr(data.values.scan, "policy") and data.values.scan.policy == "lax":
-    return True
-  end
-  return False
+  return ns.scan.scanner
 end
 
 def get_snyk_values():
