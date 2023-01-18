@@ -13,7 +13,7 @@
 apiVersion: packaging.carvel.dev/v1alpha1
 kind: PackageInstall
 metadata:
-  name: #@ "snyk-scanner-" + data.values.name
+  name: #@ "snyk-scanner-" + ns.name
   namespace: tap-install
   annotations:
     kapp.k14s.io/create-strategy: fallback-on-update
@@ -26,12 +26,12 @@ spec:
   serviceAccountName: tap-install-sa
   values:
   - secretRef:
-      name: #@ "snyk-scanner-" + data.values.name
+      name: #@ "snyk-scanner-" + ns.name
 ---
 apiVersion: v1
 kind: Secret
 metadata:
-  name: #@ "snyk-scanner-" + data.values.name
+  name: #@ "snyk-scanner-" + ns.name
   namespace: tap-install
   annotations:
     kapp.k14s.io/create-strategy: fallback-on-update
