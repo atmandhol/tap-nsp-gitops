@@ -1,5 +1,5 @@
 #@ load("@ytt:data", "data")
-#@ load("@scan:funcs.star", "is_supply_chain", "is_profile", "get_scanner_for_ns", "is_scanpolicy_lax, "get_snyk_values")
+#@ load("@scan:funcs.star", "is_supply_chain", "is_profile", "get_scanner_for_ns", "is_scanpolicy_lax", "get_snyk_values")
 #@ if is_supply_chain(['testing_scanning']) and is_profile(['full', 'build']) and get_scanner_for_ns() == "snyk":
 ---
 apiVersion: external-secrets.io/v1alpha1
