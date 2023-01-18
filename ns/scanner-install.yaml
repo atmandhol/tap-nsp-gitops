@@ -21,7 +21,7 @@ spec:
   packageRef:
     refName: snyk.scanning.apps.tanzu.vmware.com
     versionSelection:
-      constraints: ">1.0.0"
+      constraints: ">0.0.0"
       prereleases: {}
   serviceAccountName: tap-install-sa
   values:
