@@ -1,7 +1,7 @@
 load("@ytt:data", "data")
 
 def in_list(key, list):
-  return hasattr(data.values.tap_values, key) and (data.values.tap_values[key] in list)
+  return hasattr(data.values.tap_values_config, key) and (data.values.tap_values_config[key] in list)
 end
 
 def is_profile(profile_list):
