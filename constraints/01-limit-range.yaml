@@ -9,9 +9,9 @@ metadata:
 spec:
   limits:
   - default:
-      cpu: #@ lambda: data.values.tap.default-cpu-limit if hasattr(data.values, "tap") and hasattr(data.values.tap, "default-cpu-limit") else "1000m"
-      memory: #@ lambda: data.values.tap.default-mem-limit if hasattr(data.values, "tap") and hasattr(data.values.tap, "default-mem-limit") else "1Gi"
+      cpu: #@ data.values.tap["default-cpu-limit"] if hasattr(data.values, "tap") and hasattr(data.values.tap, "default-cpu-limit") else "1000m"
+      memory: #@ data.values.tap["default-mem-limit"] if hasattr(data.values, "tap") and hasattr(data.values.tap, "default-mem-limit") else "1Gi"
     defaultRequest:
-      cpu: #@ lambda: data.values.tap.default-cpu-request if hasattr(data.values, "tap") and hasattr(data.values.tap, "default-cpu-request") else "100m"
-      memory: #@ lambda: data.values.tap.default-mem-request if hasattr(data.values, "tap") and hasattr(data.values.tap, "default-mem-request") else "100Mi"
+      cpu: #@ data.values.tap["default-cpu-request"] if hasattr(data.values, "tap") and hasattr(data.values.tap, "default-cpu-request") else "100m"
+      memory: #@ data.values.tap["default-mem-request"] if hasattr(data.values, "tap") and hasattr(data.values.tap, "default-mem-request") else "100Mi"
     type: Container
