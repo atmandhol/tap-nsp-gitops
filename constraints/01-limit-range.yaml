@@ -1,5 +1,5 @@
 #@ load("@ytt:data", "data")
-#@ load("@scan:funcs.star", "is_profile")
+#@ load("@constraints:funcs.star", "is_profile")
 #@ if/end is_profile(['full', 'iterate', 'run']):
 ---
 apiVersion: v1
