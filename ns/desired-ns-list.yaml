@@ -28,3 +28,7 @@ namespaces:
   test:
     image: gradle
     cmd: ./mvnw test
+  tap:
+    #! Override the default limits with a higher value
+    default-cpu-limit: 2000m
+    default-mem-limit: 2Gi

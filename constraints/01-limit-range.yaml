@@ -1,0 +1,17 @@
+#@ load("@ytt:data", "data")
+#@ load("@scan:funcs.star", "is_profile")
+#@ if/end is_profile(['full', 'iterate', 'run']):
+---
+apiVersion: v1
+kind: LimitRange
+metadata:
+  name: namespace-resource-constraints
+spec:
+  limits:
+  - default:
+      cpu: #@ data.values.tap.default-cpu-limit if hasattr(data.values, "tap") and hasattr(data.values.tap, "default-cpu-limit") or 1000m
+      memory: #@ data.values.tap.default-mem-limit if hasattr(data.values, "tap") and hasattr(data.values.tap, "default-mem-limit") or 1Gi
+    defaultRequest:
+      cpu: #@ data.values.tap.default-cpu-request if hasattr(data.values, "tap") and hasattr(data.values.tap, "default-cpu-request") or 100m
+      memory: #@ data.values.tap.default-mem-request if hasattr(data.values, "tap") and hasattr(data.values.tap, "default-mem-request") or 100Mi
+    type: Container

@@ -62,6 +62,12 @@ namespace_provisioner:
       subPath: test
       url: https://github.com/atmandhol/tap-nsp-gitops.git
     path: _ytt_lib/testsetup
+  # Add default resource constraints on your namespaces and pods
+  - git:
+      ref: origin/main
+      subPath: constraints
+      url: https://github.com/atmandhol/tap-nsp-gitops.git
+    path: _ytt_lib/resourceconstraintssetup
   # Extras
   - git:
       ref: origin/main
