@@ -1,10 +1,3 @@
-#! List out all the namespaces you want to create with additional
-#! parameters for configuration.
-#! Following is a list of supported parameters as per my setup
-#! 1) scan.scanner: accepted values are "grype", "snyk", "carbonblack" and "prisma". Installs the scanner mentioned by this param in the namespace.
-#! 2) scan.policy: accepted values are "strict", "lax". lax scanpolicies allows all severity CVEs to be present.
-#! 3) test.image: Tekton pipeline test base image
-#! 4) test.cmd: Test command to run in the tekton pipeline
 #@data/values
 ---
 namespaces:
