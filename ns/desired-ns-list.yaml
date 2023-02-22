@@ -1,17 +1,6 @@
 #@data/values
 ---
 namespaces:
-# - name: dev
-#   scan:
-#     scanner: 
-#       - grype
-#       - snyk
-#     policy:
-#       - grype-lax
-#       - snyk-lax
-#   test:
-#     image: gradle
-#     cmd: ./mvnw test
 - name: qa
   scan:
     scanner: 
