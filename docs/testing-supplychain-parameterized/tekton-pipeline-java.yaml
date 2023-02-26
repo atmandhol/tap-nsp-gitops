@@ -2,7 +2,7 @@
 #@ def in_list(key, list):
 #@  return hasattr(data.values.tap_values, key) and (data.values.tap_values[key] in list)
 #@ end
-#@ if/end in_list('supply_chain', ['testing', 'testing_scanning']) and in_list('profile', ['full', 'iterate', 'build']) and data.values.pipeline == "java":
+#@ if/end in_list('supply_chain', ['testing', 'testing_scanning']) and in_list('profile', ['full', 'iterate', 'build']) and data.values.pipeline and data.values.pipeline == "java":
 ---
 apiVersion: tekton.dev/v1beta1
 kind: Pipeline
