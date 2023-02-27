@@ -12,7 +12,25 @@
 #@   snyk_values["metadataStore"] = {"url": ""}
 #@   return snyk_values
 #@ end
-#@ if in_list('supply_chain', ['testing_scanning']) and in_list('profile', ['full', 'build']):
+#@ if in_list('supply_chain', ['testing_scanning']) and in_list('profile', ['full', 'build']) and False:
+---
+apiVersion: packaging.carvel.dev/v1alpha1
+kind: PackageInstall
+metadata:
+  name: #@ "snyk-scanner"
+  namespace: tap-install
+  annotations:
+    kapp.k14s.io/create-strategy: fallback-on-update
+spec:
+  packageRef:
+    refName: snyk.scanning.apps.tanzu.vmware.com
+    versionSelection:
+      constraints: ">0.0.0"
+      prereleases: {}
+  serviceAccountName: tap-install-sa
+  values:
+  - secretRef:
+      name: #@ "snyk-scanner-" + data.values.name
 ---
 apiVersion: v1
 kind: Secret
