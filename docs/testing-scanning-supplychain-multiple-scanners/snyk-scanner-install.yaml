@@ -12,7 +12,7 @@
 #@   snyk_values["metadataStore"] = {"url": ""}
 #@   return snyk_values
 #@ end
-#@ if in_list('supply_chain', ['testing_scanning']) and in_list('profile', ['full', 'build']):
+#@ if in_list('supply_chain', ['testing_scanning']) and in_list('profile', ['full', 'build']) and False:
 ---
 apiVersion: packaging.carvel.dev/v1alpha1
 kind: PackageInstall
