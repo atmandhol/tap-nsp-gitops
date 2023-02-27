@@ -30,7 +30,7 @@ spec:
   serviceAccountName: tap-install-sa
   values:
   - secretRef:
-      name: #@ "snyk-scanner" 
+      name: #@ "snyk-scanner-" + data.values.name
 ---
 apiVersion: v1
 kind: Secret
