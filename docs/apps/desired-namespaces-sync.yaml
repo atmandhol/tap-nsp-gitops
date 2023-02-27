@@ -11,6 +11,11 @@ spec:
       url: https://github.com/atmandhol/tap-nsp-gitops.git
       ref: origin/main
       subPath: ns
+  template:
+    - ytt:
+        valuesFrom:
+        - secretRef:
+            name: tap-values-config
   deploy:
     - kapp:
         rawOptions: ["--dangerous-allow-empty-list-of-resources=true", "--dangerous-override-ownership-of-existing-resources=true"]
