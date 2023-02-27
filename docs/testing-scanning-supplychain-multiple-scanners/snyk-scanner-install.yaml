@@ -22,5 +22,5 @@ metadata:
   annotations:
     kapp.k14s.io/create-strategy: fallback-on-update
 stringData:
-  values.yml: #@ yaml.encode(data.values)
+  values.yml: #@ yaml.encode(get_snyk_values(data.values.name))
 #@ end
