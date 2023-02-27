@@ -2,4 +2,8 @@
 ---
 namespaces:
 - name: dev
+  scanpolicy: lax
+  pipeline: java
 - name: qa
+  scanpolicy: strict
+  pipeline: java
