@@ -4,9 +4,9 @@
 #@ def in_list(key, list):
 #@  return hasattr(data.values.tap_values, key) and (data.values.tap_values[key] in list)
 #@ end
-#@ def get_snyk_values(ns):
+#@ def get_snyk_values():
 #@   snyk_values = {}
-#@   snyk_values["namespace"] = ns
+#@   snyk_values["namespace"] = data.values.name
 #@   snyk_values["targetImagePullSecret"] = "registries-credentials"
 #@   snyk_values["snyk"] = {"tokenSecret": {"name": "snyk-token-secret"}}
 #@   snyk_values["metadataStore"] = {"url": ""}
@@ -17,7 +17,7 @@
 apiVersion: packaging.carvel.dev/v1alpha1
 kind: PackageInstall
 metadata:
-  name: #@ "snyk-scanner"
+  name: "snyk-scanner"
   namespace: tap-install
   annotations:
     kapp.k14s.io/create-strategy: fallback-on-update
@@ -35,10 +35,10 @@ spec:
 apiVersion: v1
 kind: Secret
 metadata:
-  name: #@ "snyk-scanner"
+  name: "snyk-scanner"
   namespace: tap-install
   annotations:
     kapp.k14s.io/create-strategy: fallback-on-update
 stringData:
-  values.yml: #@ yaml.encode(get_snyk_values(data.values.name))
+  values.yml: #@ yaml.encode(get_snyk_values())
 #@ end
