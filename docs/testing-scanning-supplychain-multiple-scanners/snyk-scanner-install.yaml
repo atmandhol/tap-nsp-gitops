@@ -14,24 +14,6 @@
 #@ end
 #@ if in_list('supply_chain', ['testing_scanning']) and in_list('profile', ['full', 'build']):
 ---
-apiVersion: packaging.carvel.dev/v1alpha1
-kind: PackageInstall
-metadata:
-  name: #@ "snyk-scanner"
-  namespace: tap-install
-  annotations:
-    kapp.k14s.io/create-strategy: fallback-on-update
-spec:
-  packageRef:
-    refName: snyk.scanning.apps.tanzu.vmware.com
-    versionSelection:
-      constraints: ">0.0.0"
-      prereleases: {}
-  serviceAccountName: tap-install-sa
-  values:
-  - secretRef:
-      name: #@ "snyk-scanner-" + data.values.namespaces.name
----
 apiVersion: v1
 kind: Secret
 metadata:
@@ -40,5 +22,5 @@ metadata:
   annotations:
     kapp.k14s.io/create-strategy: fallback-on-update
 stringData:
-  values.yml: #@ yaml.encode(get_snyk_values(data.values.namespaces.name))
+  values.yml: #@ yaml.encode(data.values)
 #@ end
