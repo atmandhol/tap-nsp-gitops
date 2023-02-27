@@ -10,7 +10,7 @@ spec:
   - git:
       url: https://github.com/atmandhol/tap-nsp-gitops.git
       ref: origin/main
-      subPath: ns
+      subPath: docs/desired-namespaces
   template:
     - ytt:
         valuesFrom:
