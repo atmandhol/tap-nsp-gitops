@@ -30,7 +30,7 @@ spec:
   serviceAccountName: tap-install-sa
   values:
   - secretRef:
-      name: #@ "snyk-scanner-" + data.values.namespace
+      name: #@ "snyk-scanner-" + data.values.namespaces.name
 ---
 apiVersion: v1
 kind: Secret
@@ -40,5 +40,5 @@ metadata:
   annotations:
     kapp.k14s.io/create-strategy: fallback-on-update
 stringData:
-  values.yml: #@ yaml.encode(get_snyk_values(data.values.namespace))
+  values.yml: #@ yaml.encode(get_snyk_values(data.values.namespaces.name))
 #@ end
