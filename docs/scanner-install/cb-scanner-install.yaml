@@ -9,7 +9,6 @@
 #@   cb_values["namespace"] = data.values.name
 #@   cb_values["targetImagePullSecret"] = "registries-credentials"
 #@   cb_values["carbonBlack"] = {"configSecret": {"name": "cb-config"}}
-#@   cb_values["metadataStore"] = {"url": ""}
 #@   return cb_values
 #@ end
 #@ if in_list('supply_chain', ['testing_scanning']) and in_list('profile', ['full', 'build']):
