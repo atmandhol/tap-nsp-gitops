@@ -4,7 +4,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: desired-namespaces
+  name: desired-namespaces-gitops
   namespace: tap-namespace-provisioning
   annotations:
     kapp.k14s.io/create-strategy: fallback-on-update
