@@ -4,7 +4,6 @@ kind: ConfigMap
 metadata:
   name: app-config
   namespace: dev
-type: Opaque
 data:
-  content:
-    key: value
+  # Sample Configuration values for my app
+  key: value
