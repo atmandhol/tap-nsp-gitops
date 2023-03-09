@@ -4,7 +4,7 @@ metadata:
   name: my-app
   namespace: dev
 spec:
-  serviceAccountName: default
+  serviceAccountName: default-ns-sa
   syncPeriod: 1m
   fetch:
   - git:
