@@ -1,0 +1,8 @@
+---
+tap_install:
+  secrets:
+    eso:
+      remote_refs:
+        tap_sensitive_values:
+          sensitive_tap_values_yaml:
+            key: sensitive-values
