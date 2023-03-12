@@ -1,6 +1,0 @@
----
-secrets:
-  eso:
-    install_registry_dockerconfig:
-        dockerconfigjson:
-          key: tanzunet-dockerconfig
