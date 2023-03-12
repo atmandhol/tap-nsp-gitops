@@ -4,7 +4,7 @@ tap_install:
     eso:
       gcp:
         tanzu_sync_secrets:
-          serviceAccount: tap15-gitops-tap-install-secrets@adhol-playground.iam.gserviceaccount.com
+          serviceAccount: tap-install-secrets@adhol-playground.iam.gserviceaccount.com
       remote_refs:
         tap_sensitive_values:
           sensitive_tap_values_yaml:

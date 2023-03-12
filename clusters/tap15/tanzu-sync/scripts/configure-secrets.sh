@@ -40,8 +40,8 @@ EOF
 #   fi
 # done
 
-SA_FOR_TANZU_SYNC=${SA_FOR_TANZU_SYNC:-${GKE_CLUSTER_NAME}-tanzu-sync-secrets}
-SA_FOR_TAP=${SA_FOR_TAP:-${GKE_CLUSTER_NAME}-tap-install-secrets}
+SA_FOR_TANZU_SYNC=${SA_FOR_TANZU_SYNC:-tanzu-sync-secrets}
+SA_FOR_TAP=${SA_FOR_TAP:-tap-install-secrets}
 
 # configure
 # (see: tanzu-sync/app/config/.tanzu-managed/schema.yaml)

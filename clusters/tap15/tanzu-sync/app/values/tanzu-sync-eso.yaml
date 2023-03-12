@@ -3,7 +3,7 @@ secrets:
   eso:
     gcp:
       tanzu_sync_secrets:
-        serviceAccount: tap15-gitops-tanzu-sync-secrets@adhol-playground.iam.gserviceaccount.com
+        serviceAccount: tanzu-sync-secrets@adhol-playground.iam.gserviceaccount.com
     remote_refs:
       sync_git_ssh:
         ssh_private_key:
