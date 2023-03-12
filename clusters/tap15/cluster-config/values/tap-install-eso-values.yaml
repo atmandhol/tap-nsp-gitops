@@ -3,6 +3,7 @@ tap_install:
   secrets:
     eso:
       gcp:
+        project: adhol-playground
         tanzu_sync_secrets:
           serviceAccount: tap-install-secrets@adhol-playground.iam.gserviceaccount.com
       remote_refs:

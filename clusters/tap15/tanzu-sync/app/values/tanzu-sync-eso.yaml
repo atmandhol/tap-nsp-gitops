@@ -2,6 +2,7 @@
 secrets:
   eso:
     gcp:
+      project: adhol-playground
       tanzu_sync_secrets:
         serviceAccount: tanzu-sync-secrets@adhol-playground.iam.gserviceaccount.com
     remote_refs:

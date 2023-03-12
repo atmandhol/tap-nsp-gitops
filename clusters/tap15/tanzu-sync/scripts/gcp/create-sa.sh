@@ -11,3 +11,14 @@ gcloud iam service-accounts create ${SA_FOR_TAP} --display-name="Service Account
 
 gcloud projects add-iam-policy-binding ${GCP_PROJECT} --member="serviceAccount:${SA_FOR_TANZU_SYNC}@${GCP_PROJECT}.iam.gserviceaccount.com" --role='roles/secretmanager.secretAccessor'
 gcloud projects add-iam-policy-binding ${GCP_PROJECT} --member="serviceAccount:${SA_FOR_TAP}@${GCP_PROJECT}.iam.gserviceaccount.com" --role='roles/secretmanager.secretAccessor'
+
+gcloud projects add-iam-policy-binding ${GCP_PROJECT} --member="serviceAccount:${SA_FOR_TANZU_SYNC}@${GCP_PROJECT}.iam.gserviceaccount.com" --role='roles/iam.serviceAccountTokenCreator'
+gcloud projects add-iam-policy-binding ${GCP_PROJECT} --member="serviceAccount:${SA_FOR_TAP}@${GCP_PROJECT}.iam.gserviceaccount.com" --role='roles/iam.serviceAccountTokenCreator'
+
+gcloud iam service-accounts add-iam-policy-binding ${SA_FOR_TANZU_SYNC}@${GCP_PROJECT}.iam.gserviceaccount.com \
+    --role roles/iam.workloadIdentityUser \
+    --member "serviceAccount:${GCP_PROJECT}.svc.id.goog[tanzu-sync/tanzu-sync-secrets]"
+
+gcloud iam service-accounts add-iam-policy-binding ${SA_FOR_TAP}@${GCP_PROJECT}.iam.gserviceaccount.com \
+    --role roles/iam.workloadIdentityUser \
+    --member "serviceAccount:${GCP_PROJECT}.svc.id.goog[tap-install/tap-install-secrets]"

@@ -51,6 +51,7 @@ cat > ${ts_values_path} << EOF
 secrets:
   eso:
     gcp:
+      project: ${GCP_PROJECT}
       tanzu_sync_secrets:
         serviceAccount: ${SA_FOR_TANZU_SYNC}@${GCP_PROJECT}.iam.gserviceaccount.com
     remote_refs:
@@ -81,6 +82,7 @@ tap_install:
   secrets:
     eso:
       gcp:
+        project: ${GCP_PROJECT}
         tanzu_sync_secrets:
           serviceAccount: ${SA_FOR_TAP}@${GCP_PROJECT}.iam.gserviceaccount.com
       remote_refs:
