@@ -8,6 +8,11 @@ tap_install:
         #! SecretStore config
         tap_install_secrets:
           roleARN: ""
+      gcp:
+        #! SecretStore config
+        project: ""
+        tap_install_secrets:
+          serviceAccount: ""
       #! ESO remoteRefs, by Kubernetes Secret name, then data[].secretkey
       remote_refs:
         tap_sensitive_values:

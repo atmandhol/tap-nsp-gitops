@@ -5,6 +5,11 @@ secrets:
     aws:
       tanzu_sync_secrets:
         roleARN: ""
+    gcp:
+      #! SecretStore config
+      project: ""
+      tanzu_sync_secrets:
+        serviceAccount: ""
     remote_refs:
       sync_git_ssh:
         #@schema/type any=True
