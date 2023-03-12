@@ -13,10 +13,10 @@ Environment Variables:
 EOF
 }
 
-if [[ $# -ne 0 ]]; then
-  usage
-  exit 1
-fi
+# if [[ $# -ne 0 ]]; then
+#   usage
+#   exit 1
+# fi
 
 TAP_PKGR_REPO=${TAP_PKGR_REPO:-registry.tanzu.vmware.com/tanzu-application-platform/tap-packages}
 

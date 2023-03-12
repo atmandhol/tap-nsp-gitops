@@ -12,13 +12,13 @@ function usage() {
   echo ""
 }
 
-for envvar in INSTALL_REGISTRY_USERNAME INSTALL_REGISTRY_PASSWORD INSTALL_REGISTRY_HOSTNAME KAPP_KUBECONFIG_CONTEXT ; do
-  if [[ ! -v ${envvar} ]]; then
-    usage
-    echo "Expected env var ${envvar} to be set, but was not."
-    exit 1
-  fi
-done
+# for envvar in INSTALL_REGISTRY_USERNAME INSTALL_REGISTRY_PASSWORD INSTALL_REGISTRY_HOSTNAME KAPP_KUBECONFIG_CONTEXT ; do
+#   if [[ ! -v ${envvar} ]]; then
+#     usage
+#     echo "Expected env var ${envvar} to be set, but was not."
+#     exit 1
+#   fi
+# done
 
 kubectl --context="${KAPP_KUBECONFIG_CONTEXT}"  \
   apply \

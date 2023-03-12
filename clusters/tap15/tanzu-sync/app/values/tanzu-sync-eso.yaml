@@ -1,0 +1,17 @@
+---
+secrets:
+  eso:
+    gcp:
+      tanzu_sync_secrets:
+        serviceAccount: tap15-gitops-tanzu-sync-secrets@adhol-playground.iam.gserviceaccount.com
+    remote_refs:
+      sync_git_ssh:
+        ssh_private_key:
+          key: sync-git-ssh
+          property: ssh-privatekey
+        ssh_known_hosts:
+          key: sync-git-ssh
+          property: ssh-knownhosts
+      install_registry_dockerconfig:
+        dockerconfigjson:
+          key: tanzunet-dockerconfig

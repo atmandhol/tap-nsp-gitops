@@ -43,8 +43,8 @@
       {
         "auths": {
           "registry.tanzu.vmware.com": {
-            "username": "YOUR-USERNAME@example.vmware.com",
-            "password": "YOURpasswordHERE"
+            "username": "adhol@vmware.com",
+            "password": ""
           }
         }
       }
