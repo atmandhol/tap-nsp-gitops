@@ -5,7 +5,7 @@ tap_install:
       gcp:
         project: adhol-playground
         region: us-east4
-        cluster: tap15-gitops
+        cluster: tap15rc
         tap_install_secrets:
           serviceAccount: tap-install-secrets@adhol-playground.iam.gserviceaccount.com
       remote_refs:
