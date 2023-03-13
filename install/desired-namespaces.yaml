@@ -2,4 +2,27 @@
 ---
 namespaces:
 - name: dev
+  scanner: 
+    - grype
+    - snyk
+  policy:
+    - grype-lax
+    - snyk-lax
+  pipelines:
+    - image: gradle
+      cmd: ./mvnw test
+  limits:
+    default:
+      cpu : 1500m
+      memory : 1Gi
+    defaultRequest:
+      cpu : 100m
+      memory : 1Gi
 - name: qa
+  scanner: 
+    - grype
+  policy:
+    - grype
+  pipelines:
+    - image: gradle
+      cmd: ./mvnw test

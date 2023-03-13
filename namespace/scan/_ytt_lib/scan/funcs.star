@@ -13,17 +13,17 @@ def is_supply_chain(sc_list):
 end
 
 def get_scanner_for_ns():
-  if not hasattr(data.values, "scan") and not hasattr(data.values.scan, "scanner"):
+  if not hasattr(data.values, "scanner"):
     return ["grype"]
   end
-  return data.values.scan.scanner
+  return data.values.scanner
 end
 
 def get_scanpolicy_for_ns():
-  if not hasattr(data.values, "scan") and not hasattr(data.values.scan, "policy"):
+  if not hasattr(data.values, "policy"):
     return ["grype"]
   end
-  return data.values.scan.policy
+  return data.values.policy
 end
 
 def get_snyk_values():
