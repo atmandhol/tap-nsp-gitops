@@ -11,6 +11,8 @@ tap_install:
       gcp:
         #! SecretStore config
         project: ""
+        region: ""
+        cluster: ""
         tap_install_secrets:
           serviceAccount: ""
       #! ESO remoteRefs, by Kubernetes Secret name, then data[].secretkey
