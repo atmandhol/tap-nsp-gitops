@@ -1,4 +1,5 @@
 #@ load("@ytt:data", "data")
+#@ load("@ytt:base64", "base64")
 #@ load("@scan:funcs.star", "in_list", "is_supply_chain", "is_profile", "get_scanner_for_ns")
 #@ if/end is_supply_chain(['testing_scanning']) and is_profile(['full', 'build']) and "snyk" in get_scanner_for_ns():
 ---
