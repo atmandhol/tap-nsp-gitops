@@ -39,6 +39,10 @@ git:
   sub_path: ${cluster_config_path}
 tap_package_repository:
   oci_repository: ${TAP_PKGR_REPO}
+tap_install:
+  version:
+    package_repo_bundle_tag: "${TAP_VERSION}"
+    package_version: "${TAP_VERSION}"
 EOF
 
 echo "wrote non-sensitive Tanzu Sync configuration to: tanzu-sync/app/values/tanzu-sync.yaml"
