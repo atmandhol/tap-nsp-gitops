@@ -2,7 +2,7 @@
 #@ load("@ytt:base64", "base64")
 #@ load("@ytt:yaml", "yaml")
 #@ load("@scan:funcs.star", "in_list", "is_supply_chain", "is_profile", "get_scanner_for_ns", "get_snyk_values")
-#@ if/end is_supply_chain(['testing_scanning']) and is_profile(['full', 'build']) and "snyk" in get_scanner_for_ns():
+#@ if is_supply_chain(['testing_scanning']) and is_profile(['full', 'build']) and "snyk" in get_scanner_for_ns():
 ---
 apiVersion: packaging.carvel.dev/v1alpha1
 kind: PackageInstall
