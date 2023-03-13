@@ -5,6 +5,12 @@ tap_install:
       ingress_domain: 127.0.0.1.nip.io
       ingress_issuer: ""
       kubernetes_distribution: ""
+    namespace_provisioner:
+      controller: false
+      gitops_install:
+        ref: origin/main
+        subPath: install
+        url: https://github.com/atmandhol/tap-nsp-gitops.git
     ceip_policy_disclosed: true
     profile: full
     supply_chain: testing_scanning

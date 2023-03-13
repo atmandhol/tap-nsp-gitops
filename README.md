@@ -1,14 +1,20 @@
 # tap-nsp-gitops
-This repo contains instructions on how to deploy TAP using GitOps and create resources in your Developer namespace on your TAP cluster using Namespace Provisioner (NSP) in full GitOps mode.
+This repo contains instructions on how to deploy TAP using GitOps on Google Cloud and create resources in your Developer namespaces on your TAP cluster using Namespace Provisioner (NSP) in full GitOps mode.
 
 ## Usage
 Fork/Clone this repo and update your fork with your changes. This repo serves as a base to give users a headstart.
 
+## What's used?
 This tutorial is using the following:
 - `Tanzu Application Platform` (TAP) 1.5 RC
 - `Namespace Provisioner` (NSP) for TAP for provisioning resources in our developer namespaces.
   - Namespace Provisioner is installed as part of TAP 1.5 profile installation.
-- `Google Secrets Manager` (GSM) for storing all our secrets.
+  - Creates 2 namespaces `dev` and `qa`.
+  - Installs Tekton Pipelines for 3 languages (`java`, `python` and `golang`).
+  - Installs Snyk scanner in addition to Grype scanner that is installed OOTB.
+  - Gets the Snyk scanner secret from Google Secrets Manager using External Secrets Operator.
+  - Installs RabbitMQ operator and Topology operator on the TAP cluster.
+- `Google Secrets Manager` (GSM) for storing all our sensitive secrets.
 - `External Secrets Operator` (ESO) to pull the secrets from Google Secrets Manager into our TAP Cluster.
 
 ## GKE cluster setup
@@ -59,35 +65,51 @@ shared:
 
 ## Install TAP from this GitOps repo
 The following set of commands will do the following:
-* Create a tanzu_sync app that
+* Create a `sync` app in `tanzu_sync` that
   * Install External Secrets Operator
   * Installs TAP Package Repository and required Sync secrets
   * Installs required Tanzu Network secret
-  * Creates a GitOps managed TAP install app
+  * Install TAP from the configs in the GitOps repository.
 * Creates GCP IAM service accounts for Sync app and setup the Kubernetes Service Accounts created by the Sync app with Workload identity pointing to those GCP IAM service accounts.
-* Pulls the secrets created in previous setup from Google secrets manager using the External secrets operator.
+* Pulls the secrets created in previous setup from Google secrets manager using the External secrets operator and make it available in the cluster for the `sync` app.
 * Starts TAP installation based on the values provided in the `clusters/tap15/cluster-config/values/tap-values.yaml`.
-* Installs a TAP Install Sync App that keep the cluster state in sync with the values in the GitOps repo.
 
+* Setup Required Environment variables
+Set this following env vars which are required to bootstrap the cluster and create the `sync` app which enables the whole GitOps TAP installer workflow.
 ```bash
-# Update this with your values
+# Update this with your registry if you relocated TAP packages
 export INSTALL_REGISTRY_HOSTNAME=registry.tanzu.vmware.com
+# Install registry creds. If you have not relocated TAP packages, use Tanzu Network Creds
 export INSTALL_REGISTRY_USERNAME=adhol@vmware.com
 export INSTALL_REGISTRY_PASSWORD=""
 # KUBECONTEXT of the k8s cluster created above
 export KAPP_KUBECONFIG_CONTEXT=""
+# GCP project information
 export GCP_PROJECT=adhol-playground
-# Cluster name used while creating the GKE cluster
+# GKE cluster information
 export GKE_CLUSTER_NAME=""
 export GKE_CLUSTER_REGION=us-east4
+# TAP information
 export TAP_VERSION=1.5.0-build.37
+```
+
+* Update the configs in the Git Repo to match your cluster
+```bash
 cd clusters/tap15
 ./tanzu-sync/scripts/bootstrap.sh
 ./tanzu-sync/scripts/configure.sh
 git add cluster-config/ tanzu-sync/
 git commit -m "fix: Configure install of TAP 1.5.0"
 git push
+```
+
+* Create required IAM Service accounts on GCP project and Workload identity mappings
+```bash
 ./tanzu-sync/scripts/gcp/create-sa.sh
+```
+
+* Deploy the Tanzu Sync App based on the config in your GitOps repo
+```bash
 ./tanzu-sync/scripts/deploy.sh
 ```
 
