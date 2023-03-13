@@ -7,4 +7,4 @@ kapp deploy -a tanzu-sync \
            -f cluster-config/config/tap-install/.tanzu-managed/version.yaml \
            --data-values-file tanzu-sync/app/values/ \
            --data-values-file <(tanzu-sync/scripts/sensitive-values.sh) \
-      ) $@
+      ) $@ -y

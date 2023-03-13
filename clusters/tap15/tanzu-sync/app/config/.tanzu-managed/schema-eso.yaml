@@ -8,6 +8,8 @@ secrets:
     gcp:
       #! SecretStore config
       project: ""
+      region: ""
+      cluster: ""
       tanzu_sync_secrets:
         serviceAccount: ""
     remote_refs:

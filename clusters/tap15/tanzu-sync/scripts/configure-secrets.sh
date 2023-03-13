@@ -24,6 +24,7 @@ $0 :: configure Tanzu Sync for use with External Secrets Operator (ESO)
 Required Environment Variables:
 - GCP_PROJECT -- Google Cloud project where the GKE cluster is
 - GKE_CLUSTER_NAME -- cluster on which TAP is being installed
+- GKE_CLUSTER_REGION -- region where the GKE cluster reside
 
 Optional:
 - SA_FOR_TANZU_SYNC -- name of the Service Account (to be created) which will be used to access Tanzu Sync secrets
@@ -52,6 +53,8 @@ secrets:
   eso:
     gcp:
       project: ${GCP_PROJECT}
+      region: ${GKE_CLUSTER_REGION}
+      cluster: ${GKE_CLUSTER_NAME}
       tanzu_sync_secrets:
         serviceAccount: ${SA_FOR_TANZU_SYNC}@${GCP_PROJECT}.iam.gserviceaccount.com
     remote_refs:
@@ -83,6 +86,8 @@ tap_install:
     eso:
       gcp:
         project: ${GCP_PROJECT}
+        region: ${GKE_CLUSTER_REGION}
+        cluster: ${GKE_CLUSTER_NAME}
         tanzu_sync_secrets:
           serviceAccount: ${SA_FOR_TAP}@${GCP_PROJECT}.iam.gserviceaccount.com
       remote_refs:
