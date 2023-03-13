@@ -7,10 +7,23 @@ tap_install:
       kubernetes_distribution: ""
     namespace_provisioner:
       controller: false
+      additional_sources:
+      # All my scan setup
+      - git:
+          ref: origin/main
+          subPath: namespace/scan
+          url: https://github.com/atmandhol/tap-nsp-gitops.git
+        path: _ytt_lib/scan-setup
+      # Initial dir that has all the namespaces that needs to be managed by Namespace provisioner
+      # and other bootstrapping items like registry-credentials, externalsecret to import the user-secrets, rabbitmq operators etc.
       gitops_install:
         ref: origin/main
         subPath: install
         url: https://github.com/atmandhol/tap-nsp-gitops.git
+      # Import a yaml secret named user-secrets that is imported by ESO
+      # as the external secret for that is part of gitops_install dir.
+      # that yaml secret has all my other secrets like scanner tokens, git creds, dns stuff etc.
+      # We import that yaml secret in Namespace provisioner so we can refer to values in there using data.values.imported key
       import_data_values_secrets:
         - name: user-secrets
           namespace: tap-install

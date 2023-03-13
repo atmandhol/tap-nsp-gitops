@@ -31,5 +31,6 @@ def get_snyk_values():
   snyk_values["namespace"] = data.values.name
   snyk_values["targetImagePullSecret"] = "registries-credentials"
   snyk_values["snyk"] = {"tokenSecret": {"name": "snyk-token-secret"}}
+  snyk_values["metadataStore"] = {"url": ""}
   return snyk_values
 end
