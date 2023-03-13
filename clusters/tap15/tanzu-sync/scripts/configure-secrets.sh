@@ -88,7 +88,7 @@ tap_install:
         project: ${GCP_PROJECT}
         region: ${GKE_CLUSTER_REGION}
         cluster: ${GKE_CLUSTER_NAME}
-        tanzu_sync_secrets:
+        tap_install_secrets:
           serviceAccount: ${SA_FOR_TAP}@${GCP_PROJECT}.iam.gserviceaccount.com
       remote_refs:
         tap_sensitive_values:
