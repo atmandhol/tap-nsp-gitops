@@ -11,6 +11,10 @@ tap_install:
         ref: origin/main
         subPath: install
         url: https://github.com/atmandhol/tap-nsp-gitops.git
+      import_data_values_secrets:
+        - name: user-secrets
+          namespace: tap-install
+          create_export: true
     ceip_policy_disclosed: true
     profile: full
     supply_chain: testing_scanning
