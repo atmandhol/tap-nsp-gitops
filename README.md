@@ -1,51 +1,94 @@
 # tap-nsp-gitops
-This repo contains resources that I want to create in my Developer namespaces on my TAP cluster using GitOps and Namespace Provisioner (NSP).
-
-This tutorial is using the following:
-- `Tanzu Application Platform` (TAP) 1.4
-  - I am using GKE as infra of choice.
-- `Namespace Provisioner` (NSP) for TAP for provisioning resources in our developer namespaces.
-  - Namespace Provisioner is installed as part of TAP 1.4 profile installation.
-- `Google Secrets Manager` (GSM) for storing all our secrets.
-- `External Secrets Operator` (ESO) to pull the secrets from Google Secrets Manager into our TAP Cluster.
-  - ESO is shipped as a Package in TAP 1.4 and can be installed manually.
-
-> NOTE: This repo is currently not taking care of any TAP installation. It assumes the user already has a TAP 1.4 cluster.
+This repo contains instructions on how to deploy TAP using GitOps and create resources in your Developer namespace on your TAP cluster using Namespace Provisioner (NSP) in full GitOps mode.
 
 ## Usage
 Fork/Clone this repo and update your fork with your changes. This repo serves as a base to give users a headstart.
 
-## External Secrets Operator Setup
+This tutorial is using the following:
+- `Tanzu Application Platform` (TAP) 1.5 RC
+- `Namespace Provisioner` (NSP) for TAP for provisioning resources in our developer namespaces.
+  - Namespace Provisioner is installed as part of TAP 1.5 profile installation.
+- `Google Secrets Manager` (GSM) for storing all our secrets.
+- `External Secrets Operator` (ESO) to pull the secrets from Google Secrets Manager into our TAP Cluster.
 
-We will now install the External secrets operator on our TAP cluster and connect it to our [Google Secrets Manager](https://external-secrets.io/v0.7.2/provider/google-secrets-manager/) so we can pull all our secrets in our cluster securely. If you are using [another external secrets manager](https://external-secrets.io/v0.7.2/provider/aws-secrets-manager/) that is supported by External Secrets Operator, update the [`tap/01-cluster-secret-store.yaml`](tap/01-cluster-secret-store.yaml) file to match the spec of your provider of choice.
+## GKE cluster setup
+For this setup, we need a 
+- GKE cluster and a kubeconfig to it. If using gcloud command, kubeconfig is automatically added to `~/.kube/config`.
+- [Workload identity](https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity) enabled on the GKE cluster.
+- Install Cluster Essentials on it.
 
-### Pre-requisites
-- GCP account and a Service account JSON key that has access to Google Secrets Manager to read the secrets.
+You can use a method of your choice to get this infrastructure up, I will be using [tappr](https://github.com/atmandhol/tappr), A CLI I made that helps in K8s cluster creation and TAP installation and management.
 
-### Install External Secrets Operator (ESO)
-
-It is already shipped as a package in TAP 1.4, so we can install is using the following command
+if using `tappr` (need version >=0.13.0), run the following command to create a GKE cluster in the project where your gcloud is pointing to. This cluster will have workload identity enabled by default.
 ```bash
-tanzu package install external-secrets-package --package-name external-secrets.apps.tanzu.vmware.com --version 0.6.1+tap.2 --namespace tap-install
+tappr cluster create gke --cluster-name {cluster-name} --channel RAPID
+tappr tap install-cluster-essentials
 ```
 
-### GCP Service Account authentication for ESO
+## Create required secrets in Google Secrets Manager
 
-Run the following command to create a generic secret.
-```bash
-kubectl create secret generic google-secret-manager-secret --namespace external-secrets --from-file ${PATH-TO-YOUR-JSON-FILE}
+* Create a secret named `sync-git-ssh` containing the SSH private key that has access to this git repo and associated known hosts:
+```json
+{
+  "ssh-privatekey": "-----BEGIN OPENSSH PRIVATE KEY-----\nb3B................................................................tZW\nQyN................................................................6XZ\nMQA................................................................x+w\nAAA................................................................0pR\na6I..........................xQF\n-----END OPENSSH PRIVATE KEY-----\n",
+  "ssh-knownhosts": "github.com ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOMqqnkVzrm0SdG6UOoqKLsabgH5C9okWi0dh2l9GKJl"
+}
+```
+* Next, a secret with creds for Tanzu Network so we can install TAP. Create a secret `tanzunet-dockerconfig` in Google secrets manager with following value:
+```json
+{
+  "auths": {
+    "registry.tanzu.vmware.com": {
+      "username": "user@vmware.com",
+      "password": ""
+    }
+  }
+}
+```
+* Finally, create a YAML format secret called `sensitive-values` in Google Secrets manager with all the sensitive values you have for your setup. Bare-minimum is the registry credentials that has pull/push access to a repo.
+
+ ```yaml
+# Use your creds
+shared:
+  image_registry:
+    project_path: "gcr.io/adhol-playground/tap"
+    username: "_json_key"
+    password: |
+      { ... put actual service account JSON, here ... }
 ```
 
-Label the secret for ESO so that it knows what kind of secret it is. i.e. in this case a GCP Service Account for Google Secrets Manager.
-```bash
-kubectl label secret google-secret-manager-secret --namespace external-secrets type=gcpsm
-```
+## Install TAP from this GitOps repo
+The following set of commands will do the following:
+* Create a tanzu_sync app that
+  * Install External Secrets Operator
+  * Installs TAP Package Repository and required Sync secrets
+  * Installs required Tanzu Network secret
+  * Creates a GitOps managed TAP install app
+* Creates GCP IAM service accounts for Sync app and setup the Kubernetes Service Accounts created by the Sync app with Workload identity pointing to those GCP IAM service accounts.
+* Pulls the secrets created in previous setup from Google secrets manager using the External secrets operator.
+* Starts TAP installation based on the values provided in the `clusters/tap15/cluster-config/values/tap-values.yaml`.
+* Installs a TAP Install Sync App that keep the cluster state in sync with the values in the GitOps repo.
 
-Create the ClusterSecretStore. `GCP-PROJECT` is the name of the Google Cloud Platform project and `key` is the name of the key in secret, normally its the same as the name of the JSON file. 
-
 ```bash
-ytt -f https://raw.githubusercontent.com/atmandhol/tap-nsp-gitops/main/tap/01-cluster-secret-store.yaml -v gcp_project=${GCP-PROJECT} -v key=$(kubectl get secret google-secret-manager-secret -n external-secrets -o json | jq -r .data | jq -r 'keys' | jq -r '.[0]') |
- kubectl apply -f -
+# Update this with your values
+export INSTALL_REGISTRY_HOSTNAME=registry.tanzu.vmware.com
+export INSTALL_REGISTRY_USERNAME=adhol@vmware.com
+export INSTALL_REGISTRY_PASSWORD=""
+# KUBECONTEXT of the k8s cluster created above
+export KAPP_KUBECONFIG_CONTEXT=""
+export GCP_PROJECT=adhol-playground
+# Cluster name used while creating the GKE cluster
+export GKE_CLUSTER_NAME=""
+export GKE_CLUSTER_REGION=us-east4
+export TAP_VERSION=1.5.0-build.37
+cd clusters/tap15
+./tanzu-sync/scripts/bootstrap.sh
+./tanzu-sync/scripts/configure.sh
+git add cluster-config/ tanzu-sync/
+git commit -m "fix: Configure install of TAP 1.5.0"
+git push
+./tanzu-sync/scripts/gcp/create-sa.sh
+./tanzu-sync/scripts/deploy.sh
 ```
 
 ## Namespace Provisioner Setup
