@@ -1,7 +1,10 @@
+#! This file contains a Grype Scan policy which does not blocks the supply chain regardless of any CVEs found in your source code or image.
+#! Update the notAllowedSeverities in regoFile to update this behavior.
 #@ load("@ytt:data", "data")
 #@ def in_list(key, list):
 #@  return hasattr(data.values.tap_values, key) and (data.values.tap_values[key] in list)
 #@ end
+#! This if condition ensures that this scan policy is only created if the supply chain is testing_scanning and the TAP profile used is full or build.
 #@ if/end in_list('supply_chain', ['testing_scanning']) and in_list('profile', ['full', 'build']):
 ---
 apiVersion: scanning.apps.tanzu.vmware.com/v1beta1

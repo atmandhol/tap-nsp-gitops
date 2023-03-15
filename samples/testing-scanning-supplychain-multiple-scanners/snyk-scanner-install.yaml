@@ -18,6 +18,9 @@ apiVersion: packaging.carvel.dev/v1alpha1
 kind: PackageInstall
 metadata:
   name: "snyk-scanner"
+  #! Providing the namespace here ensures that all PackageInstall for this scanner are created in a given namespace. (tap-install for this example)
+  #! The name for the PackageInstall will be suffixed with the provisioned namespace name. for e.g. snyk-scanner PackageInstall for
+  #! namespace dev will have the name snyk-scanner-dev to avoid name conflicts with other similar PackageInstalls.
   namespace: tap-install
   annotations:
     kapp.k14s.io/create-strategy: fallback-on-update
@@ -30,12 +33,16 @@ spec:
   serviceAccountName: tap-install-sa
   values:
   - secretRef:
+      #! We are appending the name of the namespace using data.values.name so the PackageInstall refers to the secret for the provisioned namespace.
       name: #@ "snyk-scanner-" + data.values.name
 ---
 apiVersion: v1
 kind: Secret
 metadata:
   name: "snyk-scanner"
+  #! Providing the namespace here ensures that all Secrets for this scanner are created in a given namespace. (tap-install for this example)
+  #! The name for the Secret will be suffixed with the provisioned namespace name. for e.g. snyk-scanner Secret for
+  #! namespace dev will have the name snyk-scanner-dev to avoid name conflicts with other similar Secrets.
   namespace: tap-install
   annotations:
     kapp.k14s.io/create-strategy: fallback-on-update

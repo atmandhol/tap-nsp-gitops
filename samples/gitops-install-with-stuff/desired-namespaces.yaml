@@ -1,5 +1,0 @@
-#@data/values
----
-namespaces:
-- name: dev
-- name: qa

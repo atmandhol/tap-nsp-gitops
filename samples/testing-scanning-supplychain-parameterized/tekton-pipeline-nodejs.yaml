@@ -2,6 +2,8 @@
 #@ def in_list(key, list):
 #@  return hasattr(data.values.tap_values, key) and (data.values.tap_values[key] in list)
 #@ end
+#! This if condition ensures that this Nodejs Tekton pipeline is only created if the supply chain is testing or 
+#! testing_scanning, the TAP profile used is full, iterate or build and pipeline parameter exists with value nodejs.
 #@ if/end in_list('supply_chain', ['testing', 'testing_scanning']) and in_list('profile', ['full', 'iterate', 'build']) and hasattr(data.values, 'pipeline') and data.values.pipeline == 'nodejs':
 ---
 apiVersion: tekton.dev/v1beta1
