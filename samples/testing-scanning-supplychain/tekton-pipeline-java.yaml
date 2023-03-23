@@ -17,7 +17,7 @@ spec:
   params:
     - name: source-url
     - name: source-revision
-    - name: test-run-dir
+    - name: sub-path
       default: "."
   tasks:
     - name: test
@@ -26,13 +26,13 @@ spec:
           value: $(params.source-url)
         - name: source-revision
           value: $(params.source-revision)
-        - name: test-run-dir
-          value: $(params.test-run-dir)
+        - name: sub-path
+          value: $(params.sub-path)
       taskSpec:
         params:
           - name: source-url
           - name: source-revision
-          - name: test-run-dir
+          - name: sub-path
         steps:
           - name: test
             image: gradle
@@ -42,7 +42,7 @@ spec:
               pwd
               MVNW=mvnw
               GRADLE="build.gradle"
-              cd $(params.test-run-dir)
+              cd $(params.sub-path)
               if [ -f "$MVNW" ]; then
                   ./mvnw test
               elif [ -f "$GRADLE" ]; then
