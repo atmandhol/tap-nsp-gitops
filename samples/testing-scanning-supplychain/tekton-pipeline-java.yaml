@@ -27,7 +27,6 @@ spec:
           value: $(params.source-revision)
         - name: test-run-dir
           value: $(params.testing_pipeline_params.test_run_dir)
-          default: "."
       taskSpec:
         params:
           - name: source-url
