@@ -17,6 +17,7 @@ spec:
   params:
     - name: source-url
     - name: source-revision
+    - name: testing_pipeline_params
   tasks:
     - name: test
       params:
