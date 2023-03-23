@@ -24,10 +24,14 @@ spec:
           value: $(params.source-url)
         - name: source-revision
           value: $(params.source-revision)
+        - name: test-run-dir
+          value: $(params.testing_pipeline_params.test_run_dir)
+          default: "."
       taskSpec:
         params:
           - name: source-url
           - name: source-revision
+          - name: test-run-dir
         steps:
           - name: test
             image: gradle
@@ -37,6 +41,7 @@ spec:
               pwd
               MVNW=mvnw
               GRADLE="build.gradle"
+              cd $(params.test-run-dir)
               if [ -f "$MVNW" ]; then
                   ./mvnw test
               elif [ -f "$GRADLE" ]; then
