@@ -17,7 +17,8 @@ spec:
   params:
     - name: source-url
     - name: source-revision
-    - name: testing_pipeline_params
+    - name: test-run-dir
+      default: "."
   tasks:
     - name: test
       params:
@@ -26,7 +27,7 @@ spec:
         - name: source-revision
           value: $(params.source-revision)
         - name: test-run-dir
-          value: $(params.testing_pipeline_params.test_run_dir)
+          value: $(params.test-run-dir)
       taskSpec:
         params:
           - name: source-url
