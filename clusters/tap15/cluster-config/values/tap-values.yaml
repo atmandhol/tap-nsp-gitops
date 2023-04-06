@@ -47,11 +47,11 @@ tap_install:
         subPath: install
         url: https://github.com/atmandhol/tap-nsp-gitops.git
       additional_sources:
-      - git:
-          ref: origin/showcase
-          subPath: resources
-          url: https://github.com/atmandhol/tap-nsp-gitops.git
-        path: _ytt_lib/dev-ns-setup
+      # - git:
+      #     ref: origin/showcase
+      #     subPath: resources
+      #     url: https://github.com/atmandhol/tap-nsp-gitops.git
+      #   path: _ytt_lib/dev-ns-setup
       - git:
           ref: tap-1.4-np
           subPath: namespace-provisioner-gitops-examples/custom-resources/random
