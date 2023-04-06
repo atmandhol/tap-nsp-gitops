@@ -4,7 +4,7 @@ secrets:
     gcp:
       project: adhol-playground
       region: us-east4
-      cluster: tap15rc
+      cluster: tap15
       tanzu_sync_secrets:
         serviceAccount: tanzu-sync-secrets@adhol-playground.iam.gserviceaccount.com
     remote_refs:
