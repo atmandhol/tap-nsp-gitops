@@ -1,0 +1,15 @@
+---
+apiVersion: external-secrets.io/v1beta1
+kind: ExternalSecret
+metadata:
+  name: sensitive-values-for-nsp
+  namespace: tap-install
+spec:
+  secretStoreRef:
+    name: tap-install-secrets
+    kind: SecretStore
+  refreshInterval: "0m"
+  data:
+  - secretKey: sensitive-values-for-nsp.yaml
+    remoteRef:
+      key: sensitive-values-for-nsp

@@ -46,3 +46,13 @@ tap_install:
         ref: origin/showcase
         subPath: install
         url: https://github.com/atmandhol/tap-nsp-gitops.git
+      additional_sources:
+      - git:
+          ref: origin/showcase
+          subPath: resources
+          url: https://github.com/atmandhol/tap-nsp-gitops.git
+        path: _ytt_lib/dev-ns-setup
+      import_data_values_secrets:
+      - name: sensitive-values-for-nsp
+        namespace: tap-install
+        create_export: true
