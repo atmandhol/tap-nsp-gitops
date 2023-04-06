@@ -2,7 +2,7 @@
 ---
 namespaces:
 - name: frontend
-  pipeline: "angular"
+  pipeline: angular
 - name: backend
-  pipeline: "java"
-  scanners: "snyk"
+  pipeline: java
+  scanners: snyk
