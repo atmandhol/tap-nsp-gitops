@@ -40,3 +40,9 @@ tap_install:
     - workshops.learningcenter.tanzu.vmware.com
     tap_telemetry:
       installed_for_vmware_internal_use: "true"
+    namespace_provisioner:
+      controller: false
+      gitops_install:
+        ref: origin/showcase
+        subPath: install
+        url: https://github.com/atmandhol/tap-nsp-gitops.git

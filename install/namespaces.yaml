@@ -1,0 +1,8 @@
+#@ load("@ytt:data", "data")
+#@ for ns in data.values.namespaces:
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: #@ ns.name
+#@ end
