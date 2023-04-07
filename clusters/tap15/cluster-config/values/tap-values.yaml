@@ -56,3 +56,7 @@ tap_install:
       - name: sensitive-values-for-nsp
         namespace: tap-install
         create_export: true
+      overlay_secrets:
+      - name: patch-workload-sa-overlay
+        namespace: tap-install
+        create_export: true
