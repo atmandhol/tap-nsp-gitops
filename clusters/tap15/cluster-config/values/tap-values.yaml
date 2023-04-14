@@ -60,3 +60,6 @@ tap_install:
       - name: patch-workload-sa-overlay
         namespace: tap-install
         create_export: true
+      - name: grype-airgap-override-stale-db-overlay-for-nsp
+        namespace: tap-install
+        create_export: true
