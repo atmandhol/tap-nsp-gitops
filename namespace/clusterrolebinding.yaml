@@ -1,5 +1,6 @@
 #@ load("@ytt:data", "data")
 ---
+apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
   name: #@ "dscp-dev-app-editor-cluster-access" + data.values.name
