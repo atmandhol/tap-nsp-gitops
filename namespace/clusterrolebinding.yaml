@@ -1,0 +1,26 @@
+#@ load("@ytt:data", "data")
+---
+kind: ClusterRoleBinding
+metadata:
+  name: dscp-dev-app-editor-cluster-access
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: app-editor-cluster-access
+subjects:
+- apiGroup: rbac.authorization.k8s.io
+  kind: Group
+  name: #@ data.values.dscp_dev_group_id
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: dscp-admin-app-editor-cluster-access
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: app-editor-cluster-access
+subjects:
+- apiGroup: rbac.authorization.k8s.io
+  kind: Group
+  name: #@ data.values.dscp_admin_group_id
