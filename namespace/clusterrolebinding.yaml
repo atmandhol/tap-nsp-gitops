@@ -3,7 +3,7 @@
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
-  name: #@ "dscp-dev-app-editor-cluster-access" + data.values.name
+  name: #@ "dscp-dev-app-editor-cluster-access-" + data.values.name
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
@@ -16,7 +16,7 @@ subjects:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
-  name: #@ "dscp-admin-app-editor-cluster-access" + data.values.name
+  name: #@ "dscp-admin-app-editor-cluster-access-" + data.values.name
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
