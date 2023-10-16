@@ -1,0 +1,19 @@
+#@data/values
+---
+namespaces:
+#! The only required parameter is the name of the namespace. All additional values provided here 
+#! for a namespace will be available under data.values for templating additional sources
+- name: sp2-ns
+  contractid: AG-993
+  invoice_param: N-value
+  quota: 5
+  dscp_dev_group_id: aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa
+  dscp_admin_group_id: bbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbb
+  internet_access_flag: false
+- name: maventest
+  contractid: AG-994
+  invoice_param: X-value
+  quota: 5
+  dscp_dev_group_id: aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa
+  dscp_admin_group_id: bbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbb
+  internet_access_flag: false

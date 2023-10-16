@@ -1,0 +1,69 @@
+#@ load("@ytt:data", "data")
+#@ if hasattr(data.values, "dscp_dev_group_id"):
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: dscp-dev-app-editor
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: app-editor
+subjects:
+- apiGroup: rbac.authorization.k8s.io
+  kind: Group
+  name: #@ data.values.dscp_dev_group_id
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: dscp-dev-permit-autoscaler
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: autoscaler
+subjects:
+- apiGroup: rbac.authorization.k8s.io
+  kind: Group
+  name: #@ data.values.dscp_dev_group_id
+#@ end
+---
+#@ if hasattr(data.values, "dscp_admin_group_id"):
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: dscp-admin-app-operator
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: app-operator
+subjects:
+- apiGroup: rbac.authorization.k8s.io
+  kind: Group
+  name: #@ data.values.dscp_admin_group_id
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: dscp-admin-app-editor
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: app-editor
+subjects:
+- apiGroup: rbac.authorization.k8s.io
+  kind: Group
+  name: #@ data.values.dscp_admin_group_id
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: dscp-admin-permit-autoscaler
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: autoscaler
+subjects:
+- apiGroup: rbac.authorization.k8s.io
+  kind: Group
+  name: #@ data.values.dscp_admin_group_id
+#@ end

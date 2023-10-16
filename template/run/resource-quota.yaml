@@ -1,0 +1,11 @@
+#@ load("@ytt:data", "data")
+#@ if hasattr(data.values, "quota"):
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: resource-quota
+spec:
+  hard:
+    requests.cpu: #@ data.values.quota
+    requests.memory: #@ '{}{}'.format(data.values.quota*5, "Gi")
+#@ end

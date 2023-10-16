@@ -1,0 +1,314 @@
+#@ load("@ytt:data", "data")
+#@ for namespace in data.values.namespaces:
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: service-provider-np
+spec:
+  podSelector: {}
+  policyTypes:
+  - Egress
+  egress:
+  - to:
+    #@ if hasattr(namespace, "privatelink_cidr"):
+    - ipBlock:
+        cidr: #@ namespace.privatelink_cidr
+    #@ end
+    #@ if hasattr(namespace, "outbound_cidr1"):
+    - ipBlock:
+        cidr: #@ namespace.outbound_cidr1
+    #@ end
+    #@ if hasattr(namespace, "outbound_cidr2"):
+    - ipBlock:
+        cidr: #@ namespace.outbound_cidr2
+    #@ end
+    #@ if hasattr(namespace, "outbound_cidr3"):
+    - ipBlock:
+        cidr: #@ namespace.outbound_cidr3
+    #@ end
+    #@ if hasattr(namespace, "outbound_cidr4"):
+    - ipBlock:
+        cidr: #@ namespace.outbound_cidr4
+    #@ end
+    #@ if hasattr(namespace, "outbound_cidr5"):
+    - ipBlock:
+        cidr: #@ namespace.outbound_cidr5
+    #@ end
+    #@ if hasattr(namespace, "outbound_cidr6"):
+    - ipBlock:
+        cidr: #@ namespace.outbound_cidr6
+    #@ end
+    #@ if hasattr(namespace, "outbound_cidr7"):
+    - ipBlock:
+        cidr: #@ namespace.outbound_cidr7
+    #@ end
+    #@ if hasattr(namespace, "outbound_cidr8"):
+    - ipBlock:
+        cidr: #@ namespace.outbound_cidr8
+    #@ end
+    #@ if hasattr(namespace, "outbound_cidr9"):
+    - ipBlock:
+        cidr: #@ namespace.outbound_cidr9
+    #@ end
+    #@ if hasattr(namespace, "outbound_cidr10"):
+    - ipBlock:
+        cidr: #@ namespace.outbound_cidr10
+    #@ end
+    #@ if hasattr(namespace, "outbound_cidr11"):
+    - ipBlock:
+        cidr: #@ namespace.outbound_cidr11
+    #@ end
+    #@ if hasattr(namespace, "outbound_cidr12"):
+    - ipBlock:
+        cidr: #@ namespace.outbound_cidr12
+    #@ end
+    #@ if hasattr(namespace, "outbound_cidr13"):
+    - ipBlock:
+        cidr: #@ namespace.outbound_cidr13
+    #@ end
+    #@ if hasattr(namespace, "outbound_cidr14"):
+    - ipBlock:
+        cidr: #@ namespace.outbound_cidr14
+    #@ end
+    #@ if hasattr(namespace, "outbound_cidr15"):
+    - ipBlock:
+        cidr: #@ namespace.outbound_cidr15
+    #@ end
+    #@ if hasattr(namespace, "outbound_cidr16"):
+    - ipBlock:
+        cidr: #@ namespace.outbound_cidr16
+    #@ end
+    #@ if hasattr(namespace, "outbound_cidr17"):
+    - ipBlock:
+        cidr: #@ namespace.outbound_cidr17
+    #@ end
+    #@ if hasattr(namespace, "outbound_cidr18"):
+    - ipBlock:
+        cidr: #@ namespace.outbound_cidr18
+    #@ end
+    #@ if hasattr(namespace, "outbound_cidr19"):
+    - ipBlock:
+        cidr: #@ namespace.outbound_cidr19
+    #@ end
+    #@ if hasattr(namespace, "outbound_cidr20"):
+    - ipBlock:
+        cidr: #@ namespace.outbound_cidr20
+    #@ end
+    #@ if hasattr(namespace, "outbound_cidr21"):
+    - ipBlock:
+        cidr: #@ namespace.outbound_cidr21
+    #@ end
+    #@ if hasattr(namespace, "outbound_cidr22"):
+    - ipBlock:
+        cidr: #@ namespace.outbound_cidr22
+    #@ end
+    #@ if hasattr(namespace, "outbound_cidr23"):
+    - ipBlock:
+        cidr: #@ namespace.outbound_cidr23
+    #@ end
+    #@ if hasattr(namespace, "outbound_cidr24"):
+    - ipBlock:
+        cidr: #@ namespace.outbound_cidr24
+    #@ end
+    #@ if hasattr(namespace, "outbound_cidr25"):
+    - ipBlock:
+        cidr: #@ namespace.outbound_cidr25
+    #@ end
+    #@ if hasattr(namespace, "outbound_cidr26"):
+    - ipBlock:
+        cidr: #@ namespace.outbound_cidr26
+    #@ end
+    #@ if hasattr(namespace, "outbound_cidr27"):
+    - ipBlock:
+        cidr: #@ namespace.outbound_cidr27
+    #@ end
+    #@ if hasattr(namespace, "outbound_cidr28"):
+    - ipBlock:
+        cidr: #@ namespace.outbound_cidr28
+    #@ end
+    #@ if hasattr(namespace, "outbound_cidr29"):
+    - ipBlock:
+        cidr: #@ namespace.outbound_cidr29
+    #@ end
+    #@ if hasattr(namespace, "outbound_cidr30"):
+    - ipBlock:
+        cidr: #@ namespace.outbound_cidr30
+    #@ end
+    #@ if hasattr(namespace, "outbound_cidr31"):
+    - ipBlock:
+        cidr: #@ namespace.outbound_cidr31
+    #@ end
+    #@ if hasattr(namespace, "outbound_cidr32"):
+    - ipBlock:
+        cidr: #@ namespace.outbound_cidr32
+    #@ end
+    #@ if hasattr(namespace, "outbound_cidr33"):
+    - ipBlock:
+        cidr: #@ namespace.outbound_cidr33
+    #@ end
+    #@ if hasattr(namespace, "outbound_cidr34"):
+    - ipBlock:
+        cidr: #@ namespace.outbound_cidr34
+    #@ end
+    #@ if hasattr(namespace, "outbound_cidr35"):
+    - ipBlock:
+        cidr: #@ namespace.outbound_cidr35
+    #@ end
+    #@ if hasattr(namespace, "outbound_cidr36"):
+    - ipBlock:
+        cidr: #@ namespace.outbound_cidr36
+    #@ end
+    #@ if hasattr(namespace, "outbound_cidr37"):
+    - ipBlock:
+        cidr: #@ namespace.outbound_cidr37
+    #@ end
+    #@ if hasattr(namespace, "outbound_cidr38"):
+    - ipBlock:
+        cidr: #@ namespace.outbound_cidr38
+    #@ end
+    #@ if hasattr(namespace, "outbound_cidr39"):
+    - ipBlock:
+        cidr: #@ namespace.outbound_cidr39
+    #@ end
+    #@ if hasattr(namespace, "outbound_cidr40"):
+    - ipBlock:
+        cidr: #@ namespace.outbound_cidr40
+    #@ end
+    #@ if namespace.internet_access_flag:
+    - ipBlock:
+        cidr:
+    - ipBlock:
+        cidr:
+    #@ end
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: #@ namespace.name
+    #@ if hasattr(namespace, "outbound_namespace1"):
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: #@ namespace.outbound_namespace1
+    #@ end
+    #@ if hasattr(namespace, "outbound_namespace2"):
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: #@ namespace.outbound_namespace2
+    #@ end
+    #@ if hasattr(namespace, "outbound_namespace3"):
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: #@ namespace.outbound_namespace3
+    #@ end
+    #@ if hasattr(namespace, "outbound_namespace4"):
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: #@ namespace.outbound_namespace4
+    #@ end
+    #@ if hasattr(namespace, "outbound_namespace5"):
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: #@ namespace.outbound_namespace5
+    #@ end
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: aks-command
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: api-auto-registration
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: app-live-view-connector
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: appsso
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: appliveview-tokens-system
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: cartographer-system
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: cert-manager
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: cosign-system
+          #!    - namespaceSelector:
+          #! matchLabels:
+          #! kubernetes.io/metadata.name: default
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: crossplane-system
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: flux-system
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: gatekeeper-system
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: kapp-controller
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: knative-serving
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: kube-node-lease
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: kube-system
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: kube-public
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: kured
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: observability-system
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: secretgen-controller
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: service-bindings
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: services-toolkit
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: source-system
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: system-operator
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: tanzu-cluster-essentials
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: tanzu-package-repo-global
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: tanzu-system-ingress
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: tap-gui
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: tap-install
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: tap-namespace-provisioning
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: tap-telemetry
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: vmware-system-telemetry
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: cert-automation
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: fluent-bit
+#@ end
