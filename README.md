@@ -11,10 +11,10 @@ namespace_provisioner:
     #   name: namespace-provisioner-git-auth
     #   namespace: tap-install
     #   create_export: true
-  overlay_secrets:
-  - name: workload-git-auth-overlay
-    namespace: tap-install
-    create_export: true
+  # overlay_secrets:
+  # - name: workload-git-auth-overlay
+  #   namespace: tap-install
+  #   create_export: true
   additional_sources:
   - git:
       url: https://github.com/atmandhol/tap-nsp-gitops.git

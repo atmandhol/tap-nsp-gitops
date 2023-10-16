@@ -1,5 +1,4 @@
 #@ load("@ytt:data", "data")
-#@ for namespace in data.values.namespaces:
 ---
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
@@ -11,171 +10,171 @@ spec:
   - Egress
   egress:
   - to:
-    #@ if hasattr(namespace, "privatelink_cidr"):
+    #@ if hasattr(data.values, "privatelink_cidr"):
     - ipBlock:
-        cidr: #@ namespace.privatelink_cidr
+        cidr: #@ data.values.privatelink_cidr
     #@ end
-    #@ if hasattr(namespace, "outbound_cidr1"):
+    #@ if hasattr(data.values, "outbound_cidr1"):
     - ipBlock:
-        cidr: #@ namespace.outbound_cidr1
+        cidr: #@ data.values.outbound_cidr1
     #@ end
-    #@ if hasattr(namespace, "outbound_cidr2"):
+    #@ if hasattr(data.values, "outbound_cidr2"):
     - ipBlock:
-        cidr: #@ namespace.outbound_cidr2
+        cidr: #@ data.values.outbound_cidr2
     #@ end
-    #@ if hasattr(namespace, "outbound_cidr3"):
+    #@ if hasattr(data.values, "outbound_cidr3"):
     - ipBlock:
-        cidr: #@ namespace.outbound_cidr3
+        cidr: #@ data.values.outbound_cidr3
     #@ end
-    #@ if hasattr(namespace, "outbound_cidr4"):
+    #@ if hasattr(data.values, "outbound_cidr4"):
     - ipBlock:
-        cidr: #@ namespace.outbound_cidr4
+        cidr: #@ data.values.outbound_cidr4
     #@ end
-    #@ if hasattr(namespace, "outbound_cidr5"):
+    #@ if hasattr(data.values, "outbound_cidr5"):
     - ipBlock:
-        cidr: #@ namespace.outbound_cidr5
+        cidr: #@ data.values.outbound_cidr5
     #@ end
-    #@ if hasattr(namespace, "outbound_cidr6"):
+    #@ if hasattr(data.values, "outbound_cidr6"):
     - ipBlock:
-        cidr: #@ namespace.outbound_cidr6
+        cidr: #@ data.values.outbound_cidr6
     #@ end
-    #@ if hasattr(namespace, "outbound_cidr7"):
+    #@ if hasattr(data.values, "outbound_cidr7"):
     - ipBlock:
-        cidr: #@ namespace.outbound_cidr7
+        cidr: #@ data.values.outbound_cidr7
     #@ end
-    #@ if hasattr(namespace, "outbound_cidr8"):
+    #@ if hasattr(data.values, "outbound_cidr8"):
     - ipBlock:
-        cidr: #@ namespace.outbound_cidr8
+        cidr: #@ data.values.outbound_cidr8
     #@ end
-    #@ if hasattr(namespace, "outbound_cidr9"):
+    #@ if hasattr(data.values, "outbound_cidr9"):
     - ipBlock:
-        cidr: #@ namespace.outbound_cidr9
+        cidr: #@ data.values.outbound_cidr9
     #@ end
-    #@ if hasattr(namespace, "outbound_cidr10"):
+    #@ if hasattr(data.values, "outbound_cidr10"):
     - ipBlock:
-        cidr: #@ namespace.outbound_cidr10
+        cidr: #@ data.values.outbound_cidr10
     #@ end
-    #@ if hasattr(namespace, "outbound_cidr11"):
+    #@ if hasattr(data.values, "outbound_cidr11"):
     - ipBlock:
-        cidr: #@ namespace.outbound_cidr11
+        cidr: #@ data.values.outbound_cidr11
     #@ end
-    #@ if hasattr(namespace, "outbound_cidr12"):
+    #@ if hasattr(data.values, "outbound_cidr12"):
     - ipBlock:
-        cidr: #@ namespace.outbound_cidr12
+        cidr: #@ data.values.outbound_cidr12
     #@ end
-    #@ if hasattr(namespace, "outbound_cidr13"):
+    #@ if hasattr(data.values, "outbound_cidr13"):
     - ipBlock:
-        cidr: #@ namespace.outbound_cidr13
+        cidr: #@ data.values.outbound_cidr13
     #@ end
-    #@ if hasattr(namespace, "outbound_cidr14"):
+    #@ if hasattr(data.values, "outbound_cidr14"):
     - ipBlock:
-        cidr: #@ namespace.outbound_cidr14
+        cidr: #@ data.values.outbound_cidr14
     #@ end
-    #@ if hasattr(namespace, "outbound_cidr15"):
+    #@ if hasattr(data.values, "outbound_cidr15"):
     - ipBlock:
-        cidr: #@ namespace.outbound_cidr15
+        cidr: #@ data.values.outbound_cidr15
     #@ end
-    #@ if hasattr(namespace, "outbound_cidr16"):
+    #@ if hasattr(data.values, "outbound_cidr16"):
     - ipBlock:
-        cidr: #@ namespace.outbound_cidr16
+        cidr: #@ data.values.outbound_cidr16
     #@ end
-    #@ if hasattr(namespace, "outbound_cidr17"):
+    #@ if hasattr(data.values, "outbound_cidr17"):
     - ipBlock:
-        cidr: #@ namespace.outbound_cidr17
+        cidr: #@ data.values.outbound_cidr17
     #@ end
-    #@ if hasattr(namespace, "outbound_cidr18"):
+    #@ if hasattr(data.values, "outbound_cidr18"):
     - ipBlock:
-        cidr: #@ namespace.outbound_cidr18
+        cidr: #@ data.values.outbound_cidr18
     #@ end
-    #@ if hasattr(namespace, "outbound_cidr19"):
+    #@ if hasattr(data.values, "outbound_cidr19"):
     - ipBlock:
-        cidr: #@ namespace.outbound_cidr19
+        cidr: #@ data.values.outbound_cidr19
     #@ end
-    #@ if hasattr(namespace, "outbound_cidr20"):
+    #@ if hasattr(data.values, "outbound_cidr20"):
     - ipBlock:
-        cidr: #@ namespace.outbound_cidr20
+        cidr: #@ data.values.outbound_cidr20
     #@ end
-    #@ if hasattr(namespace, "outbound_cidr21"):
+    #@ if hasattr(data.values, "outbound_cidr21"):
     - ipBlock:
-        cidr: #@ namespace.outbound_cidr21
+        cidr: #@ data.values.outbound_cidr21
     #@ end
-    #@ if hasattr(namespace, "outbound_cidr22"):
+    #@ if hasattr(data.values, "outbound_cidr22"):
     - ipBlock:
-        cidr: #@ namespace.outbound_cidr22
+        cidr: #@ data.values.outbound_cidr22
     #@ end
-    #@ if hasattr(namespace, "outbound_cidr23"):
+    #@ if hasattr(data.values, "outbound_cidr23"):
     - ipBlock:
-        cidr: #@ namespace.outbound_cidr23
+        cidr: #@ data.values.outbound_cidr23
     #@ end
-    #@ if hasattr(namespace, "outbound_cidr24"):
+    #@ if hasattr(data.values, "outbound_cidr24"):
     - ipBlock:
-        cidr: #@ namespace.outbound_cidr24
+        cidr: #@ data.values.outbound_cidr24
     #@ end
-    #@ if hasattr(namespace, "outbound_cidr25"):
+    #@ if hasattr(data.values, "outbound_cidr25"):
     - ipBlock:
-        cidr: #@ namespace.outbound_cidr25
+        cidr: #@ data.values.outbound_cidr25
     #@ end
-    #@ if hasattr(namespace, "outbound_cidr26"):
+    #@ if hasattr(data.values, "outbound_cidr26"):
     - ipBlock:
-        cidr: #@ namespace.outbound_cidr26
+        cidr: #@ data.values.outbound_cidr26
     #@ end
-    #@ if hasattr(namespace, "outbound_cidr27"):
+    #@ if hasattr(data.values, "outbound_cidr27"):
     - ipBlock:
-        cidr: #@ namespace.outbound_cidr27
+        cidr: #@ data.values.outbound_cidr27
     #@ end
-    #@ if hasattr(namespace, "outbound_cidr28"):
+    #@ if hasattr(data.values, "outbound_cidr28"):
     - ipBlock:
-        cidr: #@ namespace.outbound_cidr28
+        cidr: #@ data.values.outbound_cidr28
     #@ end
-    #@ if hasattr(namespace, "outbound_cidr29"):
+    #@ if hasattr(data.values, "outbound_cidr29"):
     - ipBlock:
-        cidr: #@ namespace.outbound_cidr29
+        cidr: #@ data.values.outbound_cidr29
     #@ end
-    #@ if hasattr(namespace, "outbound_cidr30"):
+    #@ if hasattr(data.values, "outbound_cidr30"):
     - ipBlock:
-        cidr: #@ namespace.outbound_cidr30
+        cidr: #@ data.values.outbound_cidr30
     #@ end
-    #@ if hasattr(namespace, "outbound_cidr31"):
+    #@ if hasattr(data.values, "outbound_cidr31"):
     - ipBlock:
-        cidr: #@ namespace.outbound_cidr31
+        cidr: #@ data.values.outbound_cidr31
     #@ end
-    #@ if hasattr(namespace, "outbound_cidr32"):
+    #@ if hasattr(data.values, "outbound_cidr32"):
     - ipBlock:
-        cidr: #@ namespace.outbound_cidr32
+        cidr: #@ data.values.outbound_cidr32
     #@ end
-    #@ if hasattr(namespace, "outbound_cidr33"):
+    #@ if hasattr(data.values, "outbound_cidr33"):
     - ipBlock:
-        cidr: #@ namespace.outbound_cidr33
+        cidr: #@ data.values.outbound_cidr33
     #@ end
-    #@ if hasattr(namespace, "outbound_cidr34"):
+    #@ if hasattr(data.values, "outbound_cidr34"):
     - ipBlock:
-        cidr: #@ namespace.outbound_cidr34
+        cidr: #@ data.values.outbound_cidr34
     #@ end
-    #@ if hasattr(namespace, "outbound_cidr35"):
+    #@ if hasattr(data.values, "outbound_cidr35"):
     - ipBlock:
-        cidr: #@ namespace.outbound_cidr35
+        cidr: #@ data.values.outbound_cidr35
     #@ end
-    #@ if hasattr(namespace, "outbound_cidr36"):
+    #@ if hasattr(data.values, "outbound_cidr36"):
     - ipBlock:
-        cidr: #@ namespace.outbound_cidr36
+        cidr: #@ data.values.outbound_cidr36
     #@ end
-    #@ if hasattr(namespace, "outbound_cidr37"):
+    #@ if hasattr(data.values, "outbound_cidr37"):
     - ipBlock:
-        cidr: #@ namespace.outbound_cidr37
+        cidr: #@ data.values.outbound_cidr37
     #@ end
-    #@ if hasattr(namespace, "outbound_cidr38"):
+    #@ if hasattr(data.values, "outbound_cidr38"):
     - ipBlock:
-        cidr: #@ namespace.outbound_cidr38
+        cidr: #@ data.values.outbound_cidr38
     #@ end
-    #@ if hasattr(namespace, "outbound_cidr39"):
+    #@ if hasattr(data.values, "outbound_cidr39"):
     - ipBlock:
-        cidr: #@ namespace.outbound_cidr39
+        cidr: #@ data.values.outbound_cidr39
     #@ end
-    #@ if hasattr(namespace, "outbound_cidr40"):
+    #@ if hasattr(data.values, "outbound_cidr40"):
     - ipBlock:
-        cidr: #@ namespace.outbound_cidr40
+        cidr: #@ data.values.outbound_cidr40
     #@ end
-    #@ if namespace.internet_access_flag:
+    #@ if data.values.internet_access_flag:
     - ipBlock:
         cidr:
     - ipBlock:
@@ -183,31 +182,31 @@ spec:
     #@ end
     - namespaceSelector:
         matchLabels:
-          kubernetes.io/metadata.name: #@ namespace.name
+          kubernetes.io/metadata.name: #@ data.values.name
     #@ if hasattr(namespace, "outbound_namespace1"):
     - namespaceSelector:
         matchLabels:
-          kubernetes.io/metadata.name: #@ namespace.outbound_namespace1
+          kubernetes.io/metadata.name: #@ data.values.outbound_namespace1
     #@ end
     #@ if hasattr(namespace, "outbound_namespace2"):
     - namespaceSelector:
         matchLabels:
-          kubernetes.io/metadata.name: #@ namespace.outbound_namespace2
+          kubernetes.io/metadata.name: #@ data.values.outbound_namespace2
     #@ end
     #@ if hasattr(namespace, "outbound_namespace3"):
     - namespaceSelector:
         matchLabels:
-          kubernetes.io/metadata.name: #@ namespace.outbound_namespace3
+          kubernetes.io/metadata.name: #@ data.values.outbound_namespace3
     #@ end
     #@ if hasattr(namespace, "outbound_namespace4"):
     - namespaceSelector:
         matchLabels:
-          kubernetes.io/metadata.name: #@ namespace.outbound_namespace4
+          kubernetes.io/metadata.name: #@ data.values.outbound_namespace4
     #@ end
     #@ if hasattr(namespace, "outbound_namespace5"):
     - namespaceSelector:
         matchLabels:
-          kubernetes.io/metadata.name: #@ namespace.outbound_namespace5
+          kubernetes.io/metadata.name: #@ data.values.outbound_namespace5
     #@ end
     - namespaceSelector:
         matchLabels:
@@ -311,4 +310,3 @@ spec:
     - namespaceSelector:
         matchLabels:
           kubernetes.io/metadata.name: fluent-bit
-#@ end
