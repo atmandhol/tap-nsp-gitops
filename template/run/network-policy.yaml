@@ -183,27 +183,27 @@ spec:
     - namespaceSelector:
         matchLabels:
           kubernetes.io/metadata.name: #@ data.values.name
-    #@ if hasattr(namespace, "outbound_namespace1"):
+    #@ if hasattr(data.values, "outbound_namespace1"):
     - namespaceSelector:
         matchLabels:
           kubernetes.io/metadata.name: #@ data.values.outbound_namespace1
     #@ end
-    #@ if hasattr(namespace, "outbound_namespace2"):
+    #@ if hasattr(data.values, "outbound_namespace2"):
     - namespaceSelector:
         matchLabels:
           kubernetes.io/metadata.name: #@ data.values.outbound_namespace2
     #@ end
-    #@ if hasattr(namespace, "outbound_namespace3"):
+    #@ if hasattr(data.values, "outbound_namespace3"):
     - namespaceSelector:
         matchLabels:
           kubernetes.io/metadata.name: #@ data.values.outbound_namespace3
     #@ end
-    #@ if hasattr(namespace, "outbound_namespace4"):
+    #@ if hasattr(data.values, "outbound_namespace4"):
     - namespaceSelector:
         matchLabels:
           kubernetes.io/metadata.name: #@ data.values.outbound_namespace4
     #@ end
-    #@ if hasattr(namespace, "outbound_namespace5"):
+    #@ if hasattr(data.values, "outbound_namespace5"):
     - namespaceSelector:
         matchLabels:
           kubernetes.io/metadata.name: #@ data.values.outbound_namespace5
