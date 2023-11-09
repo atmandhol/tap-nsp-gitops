@@ -33,6 +33,16 @@ spec:
           - name: source-url
           - name: source-revision
           - name: sub-path
+        stepTemplate:
+          securityContext:
+            allowPrivilegeEscalation: false
+            runAsUser: 1000
+            runAsNonRoot: true
+            capabilities:
+              drop:
+                - ALL
+            seccompProfile:
+              type: RuntimeDefault
         steps:
           - name: test
             image: gradle
