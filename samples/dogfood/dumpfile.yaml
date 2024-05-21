@@ -5,5 +5,5 @@ kind: Secret
 metadata:
   name: vault-dump
 type: kubernetes.io/basic-auth
-stringData:
+data:
   username: #@ data.values.imported
