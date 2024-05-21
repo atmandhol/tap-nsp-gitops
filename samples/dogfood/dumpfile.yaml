@@ -1,9 +1,10 @@
 #@ load("@ytt:data", "data")
+#@ load("@ytt:json", "json")
 ---
 apiVersion: v1
 kind: Secret
 metadata:
   name: vault-dump
 type: kubernetes.io/basic-auth
-data:
-  username: #@ data.values.imported
+stringData:
+  values: #@ json.encode(data.values.imported)
