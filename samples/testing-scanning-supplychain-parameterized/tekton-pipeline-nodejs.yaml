@@ -31,7 +31,7 @@ spec:
           - name: source-revision
         steps:
           - name: test
-            image: nodejs
+            image: mirror.gcr.io/nodejs
             script: |-
               cd `mktemp -d`
               wget -qO- $(params.source-url) | tar xvz -m
