@@ -29,6 +29,15 @@ spec:
         - name: sub-path
           value: $(params.sub-path)
       taskSpec:
+        stepTemplate:
+          securityContext:
+            allowPrivilegeEscalation: false
+            runAsNonRoot: true
+            capabilities:
+              drop:
+                - ALL
+            seccompProfile:
+              type: RuntimeDefault
         params:
           - name: source-url
           - name: source-revision

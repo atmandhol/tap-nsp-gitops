@@ -25,6 +25,15 @@ spec:
         - name: source-revision
           value: $(params.source-revision)
       taskSpec:
+        stepTemplate:
+          securityContext:
+            allowPrivilegeEscalation: false
+            runAsNonRoot: true
+            capabilities:
+              drop:
+                - ALL
+            seccompProfile:
+              type: RuntimeDefault
         params:
           - name: source-url
           - name: source-revision
