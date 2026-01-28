@@ -1,0 +1,11 @@
+---
+apiVersion: v1
+data:
+  ignoreCves: []
+  notAllowedSeverities: 
+  - critical
+  - high
+kind: Secret
+metadata:
+  name: scan-policy
+type: Opaque
