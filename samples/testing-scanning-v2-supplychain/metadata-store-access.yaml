@@ -1,0 +1,26 @@
+#@ load("@ytt:data", "data")
+#@ load("@ytt:base64", "base64")
+---
+apiVersion: v1
+data:
+  accessToken: #@ base64.encode(data.values.imported.metadataStore.accessToken)
+kind: Secret
+metadata:
+  name: metadata-store-access-token
+type: Opaque
+---
+apiVersion: v1
+data:
+  caCrt: #@ base64.encode(data.values.imported.metadataStore.caCrt)
+kind: Secret
+metadata:
+  name: metadata-store-cert
+type: Opaque
+---
+apiVersion: v1
+data:
+  url: #@ base64.encode(data.values.imported.metadataStore.url)
+kind: Secret
+metadata:
+  name: metadata-store-url
+type: Opaque
